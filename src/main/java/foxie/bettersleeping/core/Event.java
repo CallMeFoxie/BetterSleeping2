@@ -1,6 +1,6 @@
-package mod.foxie.bettersleeping.core;
+package foxie.bettersleeping.core;
 
-import mod.foxie.bettersleeping.api.PlayerSleepEvent;
+import foxie.bettersleeping.api.PlayerSleepEvent;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class Event {

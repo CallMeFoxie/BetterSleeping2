@@ -1,10 +1,15 @@
-package mod.foxie.bettersleeping.asm;
+package foxie.bettersleeping.asm;
 
-import mod.foxie.bettersleeping.BSLog;
-import mod.foxie.bettersleeping.asm.patches.ClassPatch;
-import mod.foxie.bettersleeping.asm.patches.PatchHarvestTheNether;
-import mod.foxie.bettersleeping.asm.patches.PatchIsDay;
-import mod.foxie.bettersleeping.asm.patches.PatchIsInBed;
+import foxie.bettersleeping.BSLog;
+import foxie.bettersleeping.asm.patches.ClassPatch;
+import foxie.bettersleeping.asm.patches.PatchHarvestTheNether;
+import foxie.bettersleeping.asm.patches.PatchIsDay;
+import foxie.bettersleeping.asm.patches.PatchIsInBed;
+import foxie.bettersleeping.BSLog;
+import foxie.bettersleeping.asm.patches.ClassPatch;
+import foxie.bettersleeping.asm.patches.PatchHarvestTheNether;
+import foxie.bettersleeping.asm.patches.PatchIsDay;
+import foxie.bettersleeping.asm.patches.PatchIsInBed;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;

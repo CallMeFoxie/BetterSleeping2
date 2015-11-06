@@ -1,6 +1,6 @@
-package mod.foxie.bettersleeping.asm.patches;
+package foxie.bettersleeping.asm.patches;
 
-import mod.foxie.bettersleeping.asm.MethodToPatch;
+import foxie.bettersleeping.asm.MethodToPatch;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;

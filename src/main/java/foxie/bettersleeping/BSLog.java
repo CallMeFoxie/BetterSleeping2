@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping;
+package foxie.bettersleeping;
 
 import cpw.mods.fml.common.FMLLog;
 

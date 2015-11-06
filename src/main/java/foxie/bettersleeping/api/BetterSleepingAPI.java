@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping.api;
+package foxie.bettersleeping.api;
 
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping;
+package foxie.bettersleeping;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.relauncher.Side;
-import mod.foxie.bettersleeping.proxy.ProxyCommon;
+import foxie.bettersleeping.proxy.ProxyCommon;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 

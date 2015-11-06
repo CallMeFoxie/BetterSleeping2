@@ -1,15 +1,15 @@
-package mod.foxie.bettersleeping;
+package foxie.bettersleeping;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import mod.foxie.bettersleeping.api.PlayerData;
-import mod.foxie.bettersleeping.compat.CompatibilityEnviroMine;
-import mod.foxie.bettersleeping.logic.Alarm;
-import mod.foxie.bettersleeping.logic.AlternateSleep;
-import mod.foxie.bettersleeping.logic.CaffeineLogic;
-import mod.foxie.bettersleeping.logic.DebuffLogic;
+import foxie.bettersleeping.api.PlayerData;
+import foxie.bettersleeping.compat.CompatibilityEnviroMine;
+import foxie.bettersleeping.logic.Alarm;
+import foxie.bettersleeping.logic.AlternateSleep;
+import foxie.bettersleeping.logic.CaffeineLogic;
+import foxie.bettersleeping.logic.DebuffLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.potion.Potion;

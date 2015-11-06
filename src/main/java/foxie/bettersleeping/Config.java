@@ -1,7 +1,8 @@
-package mod.foxie.bettersleeping;
+package foxie.bettersleeping;
 
-import mod.foxie.bettersleeping.api.BetterSleepingAPI;
-import mod.foxie.bettersleeping.api.PlayerDebuff;
+import foxie.bettersleeping.api.PlayerDebuff;
+import foxie.bettersleeping.api.BetterSleepingAPI;
+import foxie.bettersleeping.api.PlayerDebuff;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.config.Configuration;
 

@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping.lib;
+package foxie.bettersleeping.lib;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;

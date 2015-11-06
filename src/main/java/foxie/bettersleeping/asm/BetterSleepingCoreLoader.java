@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping.asm;
+package foxie.bettersleeping.asm;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 

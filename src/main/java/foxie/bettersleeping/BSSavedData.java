@@ -1,7 +1,8 @@
-package mod.foxie.bettersleeping;
+package foxie.bettersleeping;
 
-import mod.foxie.bettersleeping.api.ISavedDataProvider;
-import mod.foxie.bettersleeping.api.PlayerData;
+import foxie.bettersleeping.api.ISavedDataProvider;
+import foxie.bettersleeping.api.ISavedDataProvider;
+import foxie.bettersleeping.api.PlayerData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

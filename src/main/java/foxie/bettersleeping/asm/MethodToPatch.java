@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping.asm;
+package foxie.bettersleeping.asm;
 
 
 public class MethodToPatch {

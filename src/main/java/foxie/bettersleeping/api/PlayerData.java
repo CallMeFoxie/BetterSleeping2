@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping.api;
+package foxie.bettersleeping.api;
 
 import net.minecraft.nbt.NBTTagCompound;
 

@@ -1,4 +1,4 @@
-package mod.foxie.bettersleeping.asm;
+package foxie.bettersleeping.asm;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -9,7 +9,7 @@ import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLConstructionEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import mod.foxie.bettersleeping.BetterSleeping;
+import foxie.bettersleeping.BetterSleeping;
 
 public class BetterSleepingCore extends DummyModContainer {
 
