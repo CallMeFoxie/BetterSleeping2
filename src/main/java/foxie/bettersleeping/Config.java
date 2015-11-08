@@ -1,6 +1,5 @@
 package foxie.bettersleeping;
 
-import foxie.bettersleeping.api.PlayerDebuff;
 import foxie.bettersleeping.api.BetterSleepingAPI;
 import foxie.bettersleeping.api.PlayerDebuff;
 import net.minecraft.potion.Potion;
@@ -13,78 +12,79 @@ public class Config {
    public static final int POTION_DURATION = 40;      // duration of potion effect in ticks [INTERNAL]
 
    // ALARM
-   public static int defaultWakeUpTime = 0;           // daytime offset
+   public static int defaultWakeUpTime     = 0;           // daytime offset
    public static int oversleepWithoutAlarm = 2000;    // how much can you oversleep without alarm
-   public static int oversleepWithAlarm = 400;        // how much can you oversleep with alarm
+   public static int oversleepWithAlarm    = 400;        // how much can you oversleep with alarm
 
    // MAX
    public static int maximumSleepCounter = 18000;     // how much tiredness you can get the most
-   public static int spawnSleepCounter = 18000;       // how much tiredness you are spawned in
+   public static int spawnSleepCounter   = 18000;       // how much tiredness you are spawned in
 
    // BLOCKS & ITEMS
-   public static boolean enableRingWatch = true;      // enable ring watch
+   public static boolean enableRingWatch  = true;      // enable ring watch
    public static boolean enableAlarmClock = true;     // enable alarm clock
 
    // DRAIN
-   public static int ticksPerSleepCounter = 4;        // how many ticks it takes to add tiredness
-   public static int tirednessJump = 8;               // how many tiredness is added on a jump
+   public static int    ticksPerSleepCounter       = 4;        // how many ticks it takes to add tiredness
+   public static int    tirednessJump              = 8;               // how many tiredness is added on a jump
    public static double multiplicatorWhenSprinting = 2;  // how many times more you get tired when sprinting
-   public static double hungerPerSleptTick = 0.00001d;  // how much hunger you lose per slept tick
+   public static double hungerPerSleptTick         = 0.00001d;  // how much hunger you lose per slept tick
 
    // GAIN
-   public static double sleepPerSleptTick = 0.5;      // how much tiredness is removed on a slept tick
-   public static int giveSleepCounterOnSleep = ticksPerSleepCounter; // how much tiredness is added when you lay in bed
+   public static double sleepPerSleptTick       = 0.5;      // how much tiredness is removed on a slept tick
+   public static int    giveSleepCounterOnSleep = ticksPerSleepCounter; // how much tiredness is added when you lay in bed
 
    // debuff related stuff
    public static boolean enableDebuffs = true;        // enable debuffs
    public static boolean sleepOnGround = true;        // sleep on ground
 
    // tweaks
-   public static boolean enablePositionReset = false; // enable position reset when sleeping on ground
-   public static double chanceToStopRain = 0.9;       // chance to stop rain
-   public static boolean disableSleeping = false;     // disable sleeping alltogether
-   public static boolean resetCounterOnDeath = true;  // reset counter on death
-   public static boolean enableSleepTicks = false;    // enable tick simulation when asleep
-   public static double percentPeopleToSleep = 0.5;   // How many people need to sleep
-   public static boolean enableSleepCounter = true;   // enable sleep counter at all
-   public static boolean disableTimeChange = false;   // disable time changing by sleeping
+   public static boolean enablePositionReset  = false; // enable position reset when sleeping on ground
+   public static double  chanceToStopRain     = 0.9;       // chance to stop rain
+   public static boolean disableSleeping      = false;     // disable sleeping alltogether
+   public static boolean resetCounterOnDeath  = true;  // reset counter on death
+   public static boolean enableSleepTicks     = false;    // enable tick simulation when asleep
+   public static double  percentPeopleToSleep = 0.5;   // How many people need to sleep
+   public static boolean enableSleepCounter   = true;   // enable sleep counter at all
+   public static boolean disableTimeChange    = false;   // disable time changing by sleeping
 
    // gui
-   public static int guiOffsetLeft = 4;               // sleepybar offset left
-   public static int guiOffsetTop = 8;                // sleepybar offset top
-   public static boolean enableSleepyBar = true;      // display sleepybar at all
-   public static double alarmSoundLevel = 1.0d;       // play sound on woken up by alarm
+   public static int     guiOffsetLeft      = 4;               // sleepybar offset left
+   public static int     guiOffsetTop       = 8;                // sleepybar offset top
+   public static boolean enableSleepyBar    = true;      // display sleepybar at all
+   public static double  alarmSoundLevel    = 1.0d;       // play sound on woken up by alarm
    public static boolean enableSleepMessage = true;   // enable sleep message related to how many people need to sleep
 
    // caffeine
-   public static boolean enableCaffeine = true;       // enable caffeine mechanic
-   public static int caffeineDebuffsAt = 50;          // when you start getting debuff
-   public static int deathFromCaffeineOverdose = 70; // at what level you will die from overdosing ("caffeine intoxication")
-   public static String[] caffeineOredicts = {"foodCoffee", "foodTea", "foodCoffeeconleche", "foodTea", "foodRaspberryicedtea",
-         "foodChaitea", "foodEspresso", "foodMochaicecream", "cropCoffee", "pillCoffee"};   // what items will be looked for the item in
+   public static boolean  enableCaffeine            = true;       // enable caffeine mechanic
+   public static int      caffeineDebuffsAt         = 50;          // when you start getting debuff
+   public static int      deathFromCaffeineOverdose = 70; // at what level you will die from overdosing ("caffeine intoxication")
+   public static String[] caffeineOredicts          = {"foodCoffee", "foodTea", "foodCoffeeconleche", "foodTea", "foodRaspberryicedtea",
+           "foodChaitea", "foodEspresso", "foodMochaicecream", "cropCoffee", "pillCoffee"};   // what items will be looked for the item in
    // the oredict
-   public static float caffeinePerItem = 10;          // how much caffeine is absorbed per item
-   public static float caffeinePerTick = .005f;       // how much caffeine is removed per tick
-   public static int tirednessPerCaffeine = 200;      // how much he regains for a cup of coffee
-   public static float itemFoodSaturationMult = 200.0f; // multiplier for ItemFood (most of the food). Saturation = regained tiredness
-   public static float itemFoodHungerMult = 6.0f;     // multiplier for ItemFood (most of the food). Hunger = gained caffeine
+   public static float    caffeinePerItem           = 10;          // how much caffeine is absorbed per item
+   public static float    caffeinePerTick           = .005f;       // how much caffeine is removed per tick
+   public static int      tirednessPerCaffeine      = 200;      // how much he regains for a cup of coffee
+   public static float    itemFoodSaturationMult    = 200.0f; // multiplier for ItemFood (most of the food). Saturation = regained tiredness
+   public static float    itemFoodHungerMult        = 6.0f;     // multiplier for ItemFood (most of the food). Hunger = gained caffeine
 
    // compat
-   public static boolean enableCompatHarvestTN = true; // enable Nether's isSurfaceWorld override for
-   public static float enviromineSanityDecrease = .2f; // how much sanity do you lose per check (20 ticks)
-   public static int enviromineSanityAt = 20;          // at which level (%) do you start losing sanity
+   public static boolean enableCompatHarvestTN    = true; // enable Nether's isSurfaceWorld override for
+   public static float   enviromineSanityDecrease = .2f; // how much sanity do you lose per check (20 ticks)
+   public static int     enviromineSanityAt       = 20;          // at which level (%) do you start losing sanity
 
    // pills
    public static String[] sleepingPillOredicts = {"pillSleeping"};
-   public static String[] pillOredicts = {"pill"};
-   public static int caffeinePillAmount = 1000;         // how much tiredness is added per caffeine pill
-   public static int sleepingPillAmount = 2000;       // how much tiredness is removed per sleeping pill
-   public static float pillPerPill = 10;              // how much pill you get per pill
-   public static int maximumPillLevel = 30;           // how much maximum pill level you reach
+   public static String[] pillOredicts         = {"pill"};
+   public static int      caffeinePillAmount   = 1000;         // how much tiredness is added per caffeine pill
+   public static int      sleepingPillAmount   = 2000;       // how much tiredness is removed per sleeping pill
+   public static float    pillPerPill          = 10;              // how much pill you get per pill
+   public static int      maximumPillLevel     = 30;           // how much maximum pill level you reach
 
    // bad night
-   public static float chanceToGetBadNight = 0.3f;    // chance to get bad night - morning debuffs
+   public static float chanceToGetBadNight  = 0.3f;    // chance to get bad night - morning debuffs
    public static float chanceToGetGoodNight = 0.5f;   // chance to geta good night and fully heal
+   public static boolean enableSleepingNether = false;   // patch to enable sleeping in the nether (bed still explodes)
 
    private Configuration cfg;
 
@@ -92,7 +92,7 @@ public class Config {
       cfg = new Configuration(new File(filename), true);
       cfg.load();
       percentPeopleToSleep =
-            cfg.get("config", "percentPeopleToSleep", percentPeopleToSleep, "How many players have to be in bed in a dimension to sleep.")
+              cfg.get("config", "percentPeopleToSleep", percentPeopleToSleep, "How many players have to be in bed in a dimension to sleep.")
                   .getDouble();
       defaultWakeUpTime =
             cfg.getInt("defaultWakeUpTime", "config", defaultWakeUpTime, 0, 23999, "morning offset when no alarm is found [ticks]");

@@ -61,3 +61,13 @@
  \[ \] - fall asleep if overly tired
  
  \[ \] - die if overly tired
+ 
+## People module
+
+ \[ \] - keep people in world even when they disconnect
+ 
+ \[ \] - allow those people to be killed
+ 
+ \[ \] - if reconnects near a bed wake them up with full sleep bar
+  
+ \[ \] - if reconnects not near a bed wake them up with \<expected for 24h cycle\> sleep bar 
