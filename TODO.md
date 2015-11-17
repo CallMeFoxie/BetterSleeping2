@@ -54,6 +54,8 @@
  
  \[ \] - allow setting the spawn even during the daytime
  
+ \[ \] - allow setting when allowed to go to sleep
+ 
 
 ## Tiredness module
  \[ \] - sending the current tiredness to the player

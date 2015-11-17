@@ -1,10 +1,11 @@
 package foxie.bettersleeping.asm;
 
-import foxie.bettersleeping.BSLog;
+import foxie.bettersleeping.BetterSleeping;
 import foxie.bettersleeping.asm.patches.ClassPatch;
-import foxie.bettersleeping.asm.patches.PatchSleepNether;
 import foxie.bettersleeping.asm.patches.PatchIsDay;
 import foxie.bettersleeping.asm.patches.PatchIsInBed;
+import foxie.bettersleeping.asm.patches.PatchSleepNether;
+import foxie.lib.FoxLog;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -53,9 +54,9 @@ public class PatchCollection implements IClassTransformer {
                ClassVisitor patcher = patch.getDeclaredConstructor(ClassWriter.class).newInstance(wr);
                rd.accept(patcher, ClassReader.EXPAND_FRAMES);
                bytecode = wr.toByteArray();
-               BSLog.info("Successfully patched " + origName + " with " + patch.toString());
+               FoxLog.info(BetterSleeping.MODID, "Successfully patched " + origName + " with " + patch.toString());
             } catch (Exception e) {
-               BSLog.err("Failed to patch class " + origName + " with " + patch.toString() + " :( - things will not work properly!");
+               FoxLog.error(BetterSleeping.MODID, "Failed to patch class " + origName + " with " + patch.toString() + " :( - things will not work properly!");
             }
          }
       }

@@ -5,7 +5,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import foxie.bettersleeping.api.PlayerData;
-import foxie.bettersleeping.compat.CompatibilityEnviroMine;
 import foxie.bettersleeping.logic.Alarm;
 import foxie.bettersleeping.logic.AlternateSleep;
 import foxie.bettersleeping.logic.CaffeineLogic;
@@ -116,8 +115,9 @@ public class EventHandlers {
          }
 
          if (Config.enviromineSanityDecrease > 0 && Loader.isModLoaded("enviromine")) {
-            if (Config.enviromineSanityAt > ((float) data.getSleepLevel() / Config.maximumSleepCounter) * 100f)
-               CompatibilityEnviroMine.changeSanity(event.player, Config.enviromineSanityDecrease * (-1));
+            if (Config.enviromineSanityAt > ((float) data.getSleepLevel() / Config.maximumSleepCounter) * 100f) {
+            }
+            //CompatibilityEnviroMine.changeSanity(event.player, Config.enviromineSanityDecrease * (-1)); // TODO removed
          }
 
          ticksSinceUpdate = 0;
