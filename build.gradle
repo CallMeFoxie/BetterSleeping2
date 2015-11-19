@@ -1,0 +1,90 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+def VersionBuild = 0
+if (System.getenv("BUILD_NUMBER") != null)
+    VersionBuild = System.getenv("BUILD_NUMBER")
+
+version = "${config.minecraft_version}-${config.mod_version}"
+group = "mod.foxie.bettersleeping"
+archivesBaseName = "BetterSleeping"
+
+minecraft {
+    version = config.minecraft_version + "-" + config.forge_version
+    runDir = "run"
+    replace '@VERSION@', "${config.mod_version}"
+}
+
+repositories {
+    maven {
+        name "OpenMods"
+        url "http://repo.openmods.info/artifactory/openmods"
+    }
+}
+
+dependencies {
+    compile(group: 'openblocks', name: 'OpenBlocks-API', version: '1.0')
+}
+
+processResources
+        {
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
+
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+            }
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'mod.foxie.bettersleeping.asm.BetterSleepingCoreLoader'
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+task apiJar(type: Jar) {
+    from(sourceSets.main.java) {
+        include "mod/foxie/bettersleeping/api/"
+    }
+    classifier = 'api'
+}
+
+artifacts {
+    archives deobfJar
+    archives apiJar
+}
+
+build.dependsOn deobfJar, apiJar

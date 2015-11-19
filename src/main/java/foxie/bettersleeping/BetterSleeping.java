@@ -28,7 +28,6 @@ public class BetterSleeping {
 
    BSSavedData playerData;
 
-
    @EventHandler
    public void preinit(FMLPreInitializationEvent event) {
       Config c = new Config(event.getSuggestedConfigurationFile().getAbsolutePath());
