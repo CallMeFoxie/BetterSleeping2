@@ -236,8 +236,7 @@ public class Config {
       // sanity check for lazy mod authors
       if (disableSleeping) {
          if (enableSleepCounter) {
-            FoxLog.warning(BetterSleeping.MODID,
-                    "You have disabled sleeping yet enabled sleeping counter. YOU MONSTER! Disabling sleep counter for you...");
+            FoxLog.warning("You have disabled sleeping yet enabled sleeping counter. YOU MONSTER! Disabling sleep counter for you...");
             enableSleepCounter = false;
          }
       }

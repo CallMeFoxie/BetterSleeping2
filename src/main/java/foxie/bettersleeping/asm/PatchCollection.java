@@ -1,6 +1,5 @@
 package foxie.bettersleeping.asm;
 
-import foxie.bettersleeping.BetterSleeping;
 import foxie.bettersleeping.asm.patches.ClassPatch;
 import foxie.bettersleeping.asm.patches.PatchIsDay;
 import foxie.bettersleeping.asm.patches.PatchIsInBed;
@@ -54,9 +53,9 @@ public class PatchCollection implements IClassTransformer {
                ClassVisitor patcher = patch.getDeclaredConstructor(ClassWriter.class).newInstance(wr);
                rd.accept(patcher, ClassReader.EXPAND_FRAMES);
                bytecode = wr.toByteArray();
-               FoxLog.info(BetterSleeping.MODID, "Successfully patched " + origName + " with " + patch.toString());
+               FoxLog.info("Successfully patched " + origName + " with " + patch.toString());
             } catch (Exception e) {
-               FoxLog.error(BetterSleeping.MODID, "Failed to patch class " + origName + " with " + patch.toString() + " :( - things will not work properly!");
+               FoxLog.error("Failed to patch class " + origName + " with " + patch.toString() + " :( - things will not work properly!");
             }
          }
       }
