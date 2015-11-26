@@ -20,7 +20,7 @@ public class BetterSleeping {
    public static final String AUTHOR  = "CallMeFoxie";
    public static final String VERSION = "@VERSION@";
 
-   @SidedProxy(clientSide = "mod.foxie.bettersleeping.proxy.ProxyClient", serverSide = "mod.foxie.bettersleeping.proxy.ProxyCommon")
+   @SidedProxy(clientSide = "foxie.bettersleeping.proxy.ProxyClient", serverSide = "foxie.bettersleeping.proxy.ProxyCommon")
    public static ProxyCommon proxy;
 
    @Mod.Instance(MODID)
