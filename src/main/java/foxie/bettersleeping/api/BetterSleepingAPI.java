@@ -1,7 +1,6 @@
 package foxie.bettersleeping.api;
 
 import cpw.mods.fml.common.FMLLog;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.List;
 
 public class BetterSleepingAPI {
    private static List<PlayerDebuff> debuffs;
-   private static ISavedDataProvider dataProvider = null;
 
    public static void addDebuff(PlayerDebuff debuff) {
       if (debuffs == null)
@@ -18,7 +16,7 @@ public class BetterSleepingAPI {
 
       if (debuff.tiredLevel == 0) {
          FMLLog.warning("[Better Sleeping API] Tried adding debuff with tired level of 0. That is not how it is meant to be used! Use " +
-               "enabled=0 instead! Skipping this debuff...");
+                 "enabled=0 instead! Skipping this debuff...");
          return;
       }
 
@@ -44,10 +42,12 @@ public class BetterSleepingAPI {
       return removed;
    }
 
+   // TODO fix API
+   /*
    public static PlayerData getSleepingProperty(EntityPlayer player) {
       if (dataProvider == null) {
          try {
-            Class clazz = Class.forName("cz.ondraster.bettersleeping.BSSavedData");
+            Class clazz = Class.forName("foxie.bettersleeping.BSSavedData");
             dataProvider = (ISavedDataProvider) clazz.newInstance();
          } catch (Exception e) {
             FMLLog.severe("[Better Sleeping API] Some mod tried accessing saved data without the mod loaded!");
@@ -58,5 +58,5 @@ public class BetterSleepingAPI {
          return null;
 
       return dataProvider.getPlayerData(player.getUniqueID());
-   }
+   }*/
 }

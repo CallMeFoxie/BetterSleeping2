@@ -23,4 +23,11 @@ public abstract class PlayerSleepEvent extends PlayerEvent {
          super(player);
       }
    }
+
+   @Cancelable
+   public static class PlayerFallingAsleep extends PlayerSleepEvent {
+      public PlayerFallingAsleep(EntityPlayer player) {
+         super(player);
+      }
+   }
 }

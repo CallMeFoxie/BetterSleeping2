@@ -1,7 +1,6 @@
 package foxie.bettersleeping.asm.patches;
 
 import foxie.bettersleeping.asm.MethodToPatch;
-import foxie.bettersleeping.asm.MethodToPatch;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
@@ -29,7 +28,7 @@ public class PatchIsInBed extends ClassPatch {
       public void visitCode() {
          mv.visitCode();
          mv.visitVarInsn(Opcodes.ALOAD, 0);
-         mv.visitMethodInsn(Opcodes.INVOKESTATIC, "mod/foxie/bettersleeping/logic/Alarm", "canSleep",
+         mv.visitMethodInsn(Opcodes.INVOKESTATIC, "foxie/bettersleeping/core/Event", "canPlayerFallSleep",
                  "(Lnet/minecraft/entity/player/EntityPlayer;)Z", false);
          Label l1 = new Label();
          mv.visitJumpInsn(Opcodes.IFEQ, l1);

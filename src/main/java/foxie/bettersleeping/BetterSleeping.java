@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.relauncher.Side;
 import foxie.bettersleeping.proxy.ProxyCommon;
+import foxie.lib.FoxieSavedData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
@@ -26,7 +27,7 @@ public class BetterSleeping {
    @Mod.Instance(MODID)
    public static BetterSleeping INSTANCE;
 
-   BSSavedData playerData;
+   FoxieSavedData playerData;
 
    @EventHandler
    public void preinit(FMLPreInitializationEvent event) {
@@ -52,9 +53,9 @@ public class BetterSleeping {
 
       World world = MinecraftServer.getServer().worldServers[0];
 
-      playerData = (BSSavedData) world.loadItemData(BSSavedData.class, BetterSleeping.MODID);
+      playerData = (FoxieSavedData) world.loadItemData(FoxieSavedData.class, BetterSleeping.MODID);
       if (playerData == null) {
-         playerData = new BSSavedData();
+         playerData = new FoxieSavedData();
          world.setItemData(BetterSleeping.MODID, playerData);
       }
    }

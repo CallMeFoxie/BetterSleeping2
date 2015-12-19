@@ -30,7 +30,7 @@ public class PatchIsDay extends ClassPatch {
          if (desc.equals("()Z") && (name.equals("isDaytime") || name.equals("w"))) {
             super.visitInsn(Opcodes.POP);
             mv.visitVarInsn(Opcodes.ALOAD, 0);
-            super.visitMethodInsn(Opcodes.INVOKESTATIC, "mod/foxie/bettersleeping/core/Event", "isPlayerAllowedToSleep",
+            super.visitMethodInsn(Opcodes.INVOKESTATIC, "foxie/bettersleeping/core/Event", "isPlayerAllowedToSleep",
                     "(Lnet/minecraft/entity/player/EntityPlayer;)Z", false);
          } else {
             super.visitMethodInsn(opcode, owner, name, desc, itf);

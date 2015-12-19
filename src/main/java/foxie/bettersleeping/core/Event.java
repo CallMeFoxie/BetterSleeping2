@@ -9,4 +9,10 @@ public class Event {
 
       return !allowedToSleep.isCanceled(); // negate the isCanceled because of how the vanilla code is setup
    }
+
+   public static boolean canPlayerFallSleep(EntityPlayer player) {
+      PlayerSleepEvent.PlayerFallingAsleep fallingAsleep= new PlayerSleepEvent.PlayerFallingAsleep(player);
+
+      return fallingAsleep.isCanceled();
+   }
 }

@@ -4,7 +4,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import foxie.bettersleeping.api.PlayerData;
+import foxie.lib.FoxieSavedData;
+import foxie.lib.PlayerData;
 import foxie.bettersleeping.logic.Alarm;
 import foxie.bettersleeping.logic.AlternateSleep;
 import foxie.bettersleeping.logic.CaffeineLogic;
@@ -46,9 +47,9 @@ public class EventHandlers {
 
       if (event.entity instanceof EntityPlayer) {
          EntityPlayer player = (EntityPlayer) event.entity;
-         PlayerData data = BSSavedData.instance().getPlayerData(player.getUniqueID());
+         PlayerData data = FoxieSavedData.instance().getPlayerData(player.getUniqueID());
          data.reset(Config.spawnSleepCounter);
-         BSSavedData.instance().markDirty();
+         FoxieSavedData.instance().markDirty();
       }
    }
 
@@ -80,7 +81,7 @@ public class EventHandlers {
          return;
 
       if (Config.enableSleepCounter) {
-         data = BSSavedData.instance().getData(event.player);
+         data = FoxieSavedData.instance().getData(event.player);
          data.ticksSinceUpdate++;
          double ticksPerSleepCounter = Config.ticksPerSleepCounter;
 
@@ -123,7 +124,7 @@ public class EventHandlers {
          ticksSinceUpdate = 0;
       }
 
-      BSSavedData.instance().markDirty();
+      FoxieSavedData.instance().markDirty();
 
       ticksSinceUpdate++;
    }
@@ -140,7 +141,7 @@ public class EventHandlers {
       }
 
       if (Config.enableSleepCounter) {
-         PlayerData data = BSSavedData.instance().getData(event.entityPlayer);
+         PlayerData data = FoxieSavedData.instance().getData(event.entityPlayer);
 
          if (data.getSleepLevel() >= Config.maximumSleepCounter) {
             event.entityPlayer.addChatComponentMessage(new ChatComponentTranslation("msg.notTired"));
@@ -176,13 +177,13 @@ public class EventHandlers {
          if (player.capabilities.isCreativeMode)
             return;
 
-         PlayerData data = BSSavedData.instance().getData(player);
+         PlayerData data = FoxieSavedData.instance().getData(player);
          if (player.isSprinting())
             data.decreaseSleepLevel((long) (Config.tirednessJump * Config.multiplicatorWhenSprinting));
          else
             data.decreaseSleepLevel(Config.tirednessJump);
 
-         BSSavedData.instance().markDirty();
+         FoxieSavedData.instance().markDirty();
 
       }
    }
@@ -212,7 +213,7 @@ public class EventHandlers {
       if (event.entityPlayer.worldObj.isRemote)
          return;
 
-      PlayerData data = BSSavedData.instance().getData(event.entityPlayer);
+      PlayerData data = FoxieSavedData.instance().getData(event.entityPlayer);
 
       if (CaffeineLogic.isCoffee(event.item)) {
          if (event.result.getItem() instanceof ItemFood) {
@@ -228,17 +229,17 @@ public class EventHandlers {
             data.increaseSleepLevel(Config.tirednessPerCaffeine);
          }
 
-         BSSavedData.instance().markDirty();
+         FoxieSavedData.instance().markDirty();
       }
 
       if (CaffeineLogic.isPill(event.item)) {
          data.increasePillLevel(Config.pillPerPill);
-         BSSavedData.instance().markDirty();
+         FoxieSavedData.instance().markDirty();
       }
 
       if (CaffeineLogic.isSleepingPill(event.item)) {
          data.decreaseSleepLevel(Config.sleepingPillAmount);
-         BSSavedData.instance().markDirty();
+         FoxieSavedData.instance().markDirty();
       }
 
       // send update about tiredness to the client
