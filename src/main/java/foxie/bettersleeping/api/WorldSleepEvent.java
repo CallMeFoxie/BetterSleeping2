@@ -1,7 +1,5 @@
 package foxie.bettersleeping.api;
 
-import cpw.mods.fml.common.eventhandler.Cancelable;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -11,12 +9,41 @@ public class WorldSleepEvent extends WorldEvent {
    }
 
    /**
-    * This even is fired before any progress towards calculating new TOD or anything is run.
-    * This event is NOT cancelable.
+    * This event is used to gather the time you want to sleep each world.
     */
    public static class Pre extends WorldSleepEvent {
+      long sleptTime    = 0;
+      int  lastPriority = -1;
+
       public Pre(World world) {
          super(world);
+      }
+
+      /**
+       * Attempts to set a new slept time. If the priority is higher than the one set it overwrites the value.
+       *
+       * @param sleptTime new calculated slept time
+       * @param priority  priority of this calculation. Base priority is -1
+       * @return if succeeded
+       */
+      public boolean setSleptTime(long sleptTime, int priority) {
+         if (sleptTime < 0) // please...
+            return false;
+
+         if (priority > lastPriority) {
+            this.sleptTime = sleptTime;
+            return true;
+         }
+
+         return false;
+      }
+
+      public long getSleptTime() {
+         return sleptTime;
+      }
+
+      public int getLastPriority() {
+         return lastPriority;
       }
    }
 
@@ -34,25 +61,6 @@ public class WorldSleepEvent extends WorldEvent {
 
       public long getSleptTicks() {
          return sleptTicks;
-      }
-   }
-
-   /**
-    * This event is fired before a person is supposed to fall on a ground outside of bed - when he reaches 0 on his Sleepybar.
-    * This event is cancelable.
-    * This event is NOT fired when sleeping on ground is disabled.
-    */
-   @Cancelable
-   public static class SleepOnGround extends WorldSleepEvent {
-      private EntityPlayer player;
-
-      public SleepOnGround(EntityPlayer player) {
-         super(player.worldObj);
-         this.player = player;
-      }
-
-      public EntityPlayer getPlayer() {
-         return player;
       }
    }
 }

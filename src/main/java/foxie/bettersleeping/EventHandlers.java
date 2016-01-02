@@ -1,39 +1,13 @@
 package foxie.bettersleeping;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import foxie.lib.FoxieSavedData;
-import foxie.lib.PlayerData;
-import foxie.bettersleeping.logic.Alarm;
-import foxie.bettersleeping.logic.AlternateSleep;
-import foxie.bettersleeping.logic.CaffeineLogic;
-import foxie.bettersleeping.logic.DebuffLogic;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFood;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
-import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
-
-import java.util.Random;
-
 public class EventHandlers {
 
    public static EventHandlers INSTANCE;
 
-   private int ticksSinceUpdate = 0;
-
    public EventHandlers() {
       INSTANCE = this;
    }
-
+/*
    @SubscribeEvent
    public void onPlayerDeath(LivingDeathEvent event) {
       if (event.entity.worldObj.isRemote)
@@ -244,5 +218,5 @@ public class EventHandlers {
 
       // send update about tiredness to the client
       DebuffLogic.updateClientIfNeeded(event.entityPlayer, data);
-   }
+   }*/
 }

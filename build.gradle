@@ -54,7 +54,7 @@ repositories {
 
 dependencies {
     compile(group: 'openblocks', name: 'OpenBlocks-API', version: '1.0')
-    compile "foxie:FoxieLib:1.7.10-1.0-8:deobf"
+    compile "foxie:FoxieLib:1.7.10-1.0-9:deobf"
 }
 
 processResources

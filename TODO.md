@@ -1,15 +1,23 @@
 ## Core module (events)
- \[ \] - event for can sleep anywhere on the ground
+ \[X\] - event for can sleep anywhere on the ground
+ 
+ \[ \] - fire
  
  \[X\] - event for can sleep
  
+ \[ \] - fire
+ 
  \[ \] - event for can sleep in a given bed
  
- \[ \] - event for how long should fall asleep in a given bed
+ \[ \] - fire
  
- \[ \] - event for setting the wake up time
+ \[X\] - event for setting the wake up time
  
- \[ \] - event for how long has been slept and if each player actually slept and in what bed
+ \[ \] - fire
+ 
+ \[X\] - event for how long has player slept (when they are waking up)
+ 
+ \[ \] - fire
  
  
  
@@ -43,7 +51,7 @@
  
  \[ \] - Morpheus
  
- \[ \] - Harvest the Nether (just the general hack to enable beds in the nether)
+ \[X\] - Harvest the Nether (just the general hack to enable beds in the nether)
  
  
  
