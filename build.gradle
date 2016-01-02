@@ -31,7 +31,7 @@ if (System.getenv("BUILD_NUMBER") != null) {
 }
 
 version = "${config.minecraft_version}-${config.mod_version}${VersionBuild}"
-group = "foxie.bettersleeping"
+group = "foxie"
 archivesBaseName = "BetterSleeping"
 
 minecraft {
@@ -45,10 +45,16 @@ repositories {
         name "OpenMods"
         url "http://repo.openmods.info/artifactory/openmods"
     }
+
+    maven {
+        name "Foxiehost"
+        url "http://maven.foxiehost.eu"
+    }
 }
 
 dependencies {
     compile(group: 'openblocks', name: 'OpenBlocks-API', version: '1.0')
+    compile "foxie:FoxieLib:1.7.10-1.0-8:deobf"
 }
 
 processResources
