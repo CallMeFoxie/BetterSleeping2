@@ -1,6 +1,8 @@
 package foxie.bettersleeping.api;
 
 import cpw.mods.fml.common.FMLLog;
+import foxie.bettersleeping.SaveHandler;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 
 import java.util.ArrayList;
@@ -42,21 +44,9 @@ public class BetterSleepingAPI {
       return removed;
    }
 
-   // TODO fix API
-   /*
-   public static PlayerData getSleepingProperty(EntityPlayer player) {
-      if (dataProvider == null) {
-         try {
-            Class clazz = Class.forName("foxie.bettersleeping.BSSavedData");
-            dataProvider = (ISavedDataProvider) clazz.newInstance();
-         } catch (Exception e) {
-            FMLLog.severe("[Better Sleeping API] Some mod tried accessing saved data without the mod loaded!");
-         }
-      }
 
-      if (dataProvider == null)
-         return null;
-
-      return dataProvider.getPlayerData(player.getUniqueID());
-   }*/
+   // TODO make API not call the base mod
+   public static PlayerBSData getSleepingProperty(EntityPlayer player) {
+      return SaveHandler.getDataFor(player);
+   }
 }
