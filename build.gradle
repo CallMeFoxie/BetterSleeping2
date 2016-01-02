@@ -25,11 +25,13 @@ configFile.withReader {
 }
 
 def VersionBuild = 0
-if (System.getenv("BUILD_NUMBER") != null)
-    VersionBuild = System.getenv("BUILD_NUMBER")
+if (System.getenv("BUILD_NUMBER") != null) {
+    def buildver = System.getenv("BUILD_NUMBER")
+    VersionBuild = "-${buildver}"
+}
 
-version = "${config.minecraft_version}-${config.mod_version}"
-group = "mod.foxie.bettersleeping"
+version = "${config.minecraft_version}-${config.mod_version}${VersionBuild}"
+group = "foxie.bettersleeping"
 archivesBaseName = "BetterSleeping"
 
 minecraft {
@@ -88,3 +90,55 @@ artifacts {
 }
 
 build.dependsOn deobfJar, apiJar
+
+// deployment
+configurations { deployerJars }
+dependencies { deployerJars "org.apache.maven.wagon:wagon-ssh:2.2" }
+
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+
+            repository(url: "scp://maven.foxiehost.lan/home/maven/public/") {
+                authentication(userName: "maven", password: "maven")
+            }
+
+            pom {
+                groupId = project.group
+                version = project.version
+                artifactId = project.archivesBaseName
+                project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'BetterSleeping2'
+                    url 'http://foxiemods.com/BetterSleeping2'
+                    scm {
+                        url 'https://github.com/CallMeFoxie/BetterSleeping2'
+                        connection 'scm:git:git@github.com:CallMeFoxie/BetterSleeping2.git'
+                        developerConnection 'scm:git:git@github.com:CallMeFoxie/BetterSleeping2.git'
+                    }
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/CallMeFoxie/BetterSleeping2/issues'
+                    }
+                    licenses {
+                        license {
+                            name 'TBD'
+                            url 'https://does-not-exist'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'CallMeFoxie'
+                            name 'CallMeFoxie'
+                            roles { role 'developer' }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
