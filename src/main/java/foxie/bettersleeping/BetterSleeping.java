@@ -1,18 +1,17 @@
 package foxie.bettersleeping;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
-import cpw.mods.fml.relauncher.Side;
 import foxie.bettersleeping.proxy.ProxyCommon;
 import foxie.lib.FoxieSavedData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = BetterSleeping.MODID, name = BetterSleeping.NAME, version = BetterSleeping.VERSION)
 public class BetterSleeping {
@@ -29,24 +28,24 @@ public class BetterSleeping {
 
    FoxieSavedData playerData;
 
-   @EventHandler
+   @Mod.EventHandler
    public void preinit(FMLPreInitializationEvent event) {
       Config c = new Config(event.getSuggestedConfigurationFile().getAbsolutePath());
       proxy.preinit(event);
    }
 
-   @EventHandler
+   @Mod.EventHandler
    public void init(FMLInitializationEvent event) {
       proxy.init(event);
    }
 
-   @EventHandler
+   @Mod.EventHandler
    public void postinit(FMLPostInitializationEvent event) {
 
    }
 
 
-   @EventHandler
+   @Mod.EventHandler
    public void onServerStarted(FMLServerStartedEvent event) {
       if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
          return;

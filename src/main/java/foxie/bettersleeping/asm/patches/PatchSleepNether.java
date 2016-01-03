@@ -1,12 +1,12 @@
 package foxie.bettersleeping.asm.patches;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.relauncher.Side;
 import foxie.bettersleeping.Config;
 import foxie.bettersleeping.asm.MethodToPatch;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldProviderHell;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;

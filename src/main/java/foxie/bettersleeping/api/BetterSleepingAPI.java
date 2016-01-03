@@ -1,9 +1,10 @@
 package foxie.bettersleeping.api;
 
-import cpw.mods.fml.common.FMLLog;
+
 import foxie.bettersleeping.SaveHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
+import net.minecraftforge.fml.common.FMLLog;
 
 import java.util.ArrayList;
 import java.util.Iterator;

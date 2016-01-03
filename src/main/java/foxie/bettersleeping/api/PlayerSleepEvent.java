@@ -1,8 +1,9 @@
 package foxie.bettersleeping.api;
 
-import cpw.mods.fml.common.eventhandler.Cancelable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
 public abstract class PlayerSleepEvent extends PlayerEvent {
 

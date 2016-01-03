@@ -1,10 +1,11 @@
 package foxie.bettersleeping.asm;
 
-import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 import java.util.Map;
 
-@IFMLLoadingPlugin.MCVersion("1.7.10")
+@IFMLLoadingPlugin.MCVersion("1.8.9")
 @IFMLLoadingPlugin.Name(BetterSleepingCoreLoader.NAME)
 public class BetterSleepingCoreLoader implements IFMLLoadingPlugin {
    public static final String NAME = "BetterSleeping Core";
