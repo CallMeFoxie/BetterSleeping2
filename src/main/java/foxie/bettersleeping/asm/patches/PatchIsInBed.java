@@ -28,7 +28,7 @@ public class PatchIsInBed extends ClassPatch {
       public void visitCode() {
          mv.visitCode();
          mv.visitVarInsn(Opcodes.ALOAD, 0);
-         mv.visitMethodInsn(Opcodes.INVOKESTATIC, "foxie/bettersleeping/core/Event", "canPlayerFallSleep",
+         mv.visitMethodInsn(Opcodes.INVOKESTATIC, "foxie/bettersleeping/core/BSEvents", "isPlayerAllowedToSleep",
                  "(Lnet/minecraft/entity/player/EntityPlayer;)Z", false);
          Label l1 = new Label();
          mv.visitJumpInsn(Opcodes.IFEQ, l1);

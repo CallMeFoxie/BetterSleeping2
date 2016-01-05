@@ -4,6 +4,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
 
 public class WorldSleepEvent extends WorldEvent {
+   public static final int PRIORITY_BUILTIN = 10;
+   public static final int PRIORITY_ALARM   = 20;
+
    public WorldSleepEvent(World world) {
       super(world);
    }
