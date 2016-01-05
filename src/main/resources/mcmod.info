@@ -1,0 +1,16 @@
+[
+{
+  "modid": "bettersleeping",
+  "name": "Better Sleeping",
+  "description": "Overhauling how sleeping works. Sleep during the day but not too much!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CallMeFoxie"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
