@@ -50,4 +50,8 @@ public class BetterSleepingAPI {
    public static PlayerBSData getSleepingProperty(EntityPlayer player) {
       return SaveHandler.getDataFor(player);
    }
+
+   public static void setSleepingProperty(EntityPlayer player, PlayerBSData data) {
+      SaveHandler.saveDataFor(player, data);
+   }
 }

@@ -1,17 +1,21 @@
 package foxie.bettersleeping.modules;
 
+import foxie.lib.Registrator;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Modules {
    public List<Module> modules;
 
    public Modules() {
+      modules = new ArrayList<Module>();
+
       modules.add(new AlarmModule());
       modules.add(new BedModule());
       modules.add(new CoffeeModule());
@@ -22,8 +26,11 @@ public class Modules {
    }
 
    public void preinit(FMLPreInitializationEvent event) {
-      for (Module module : modules)
+      for (Module module : modules) {
          module.preinit(event);
+         Registrator.checkForEvents(module);
+         Registrator.checkConfigurable(module.getClass());
+      }
    }
 
    public void init(FMLInitializationEvent event) {

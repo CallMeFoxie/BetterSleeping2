@@ -12,6 +12,8 @@ public class Config {
    // PRIVATE
    public static final int POTION_DURATION = 40;      // duration of potion effect in ticks [INTERNAL]
 
+   // =============================== OLD STUFF ========================================
+
    // ALARM
    public static int defaultWakeUpTime     = 0;           // daytime offset
    public static int oversleepWithoutAlarm = 2000;    // how much can you oversleep without alarm

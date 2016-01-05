@@ -3,6 +3,7 @@ package foxie.bettersleeping.api;
 // TODO make API not call the base mod
 
 import foxie.lib.IPlayerData;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerBSData implements IPlayerData {
@@ -11,11 +12,19 @@ public class PlayerBSData implements IPlayerData {
    private long pillness;
    private long caffeine;
 
-   public PlayerBSData(NBTTagCompound compound) {
+   private EntityPlayer player;
+
+   public PlayerBSData(EntityPlayer player, NBTTagCompound compound) {
+      this(player);
       readFromNBT(compound);
    }
 
-   public PlayerBSData() {
+   public PlayerBSData(EntityPlayer player) {
+      this.player = player;
+   }
+
+   public EntityPlayer getPlayer() {
+      return player;
    }
 
    public void readFromNBT(NBTTagCompound compound) {
@@ -30,6 +39,10 @@ public class PlayerBSData implements IPlayerData {
       compound.setLong("caffeine", caffeine);
    }
 
+   public void markDirty() {
+      BetterSleepingAPI.setSleepingProperty(player, this);
+   }
+
    @Override
    public String getMODID() {
       return "BetterSleeping";
@@ -41,6 +54,15 @@ public class PlayerBSData implements IPlayerData {
 
    public void setEnergy(long energy) {
       this.energy = Math.max(energy, 0);
+      markDirty();
+   }
+
+   public void addEnergy(long energy) {
+      this.energy += energy;
+      if (this.energy < 0)
+         this.energy = 0;
+
+      markDirty();
    }
 
    public long getPillness() {
@@ -49,6 +71,15 @@ public class PlayerBSData implements IPlayerData {
 
    public void setPillness(long pillness) {
       this.pillness = Math.max(pillness, 0);
+      markDirty();
+   }
+
+   public void addPillness(long pillness) {
+      this.pillness += pillness;
+      if (this.pillness < 0)
+         this.pillness = 0;
+
+      markDirty();
    }
 
    public long getCaffeine() {
@@ -57,5 +88,14 @@ public class PlayerBSData implements IPlayerData {
 
    public void setCaffeine(long caffeine) {
       this.caffeine = Math.max(caffeine, 0);
+      markDirty();
+   }
+
+   public void addCaffeine(long caffeine) {
+      this.caffeine += caffeine;
+      if (this.caffeine < 0)
+         this.caffeine = 0;
+
+      markDirty();
    }
 }
