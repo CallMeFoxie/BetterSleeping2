@@ -23,9 +23,9 @@ public class PatchCollection implements IClassTransformer {
       addPatch("net.minecraft.entity.player.EntityPlayer", PatchIsInBed.class);
       addPatch("net.minecraft.world.WorldProviderHell", PatchSleepNether.class);
 
-      addPatch("yz", PatchIsDay.class);
-      addPatch("yz", PatchIsInBed.class);
-      addPatch("aqp", PatchSleepNether.class);
+      addPatch("wn", PatchIsDay.class);
+      addPatch("wn", PatchIsInBed.class);
+      addPatch("ann", PatchSleepNether.class);
    }
 
    public static void addPatch(String classname, Class<? extends ClassPatch> patch) {

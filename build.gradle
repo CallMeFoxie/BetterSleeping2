@@ -78,7 +78,7 @@ processResources
         }
 jar {
     manifest {
-        attributes 'FMLCorePlugin': 'mod.foxie.bettersleeping.asm.BetterSleepingCoreLoader'
+        attributes 'FMLCorePlugin': 'foxie.bettersleeping.asm.BetterSleepingCoreLoader'
         attributes 'FMLCorePluginContainsFMLMod': 'true'
     }
 }
