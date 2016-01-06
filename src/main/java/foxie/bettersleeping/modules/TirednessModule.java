@@ -8,7 +8,9 @@ import foxie.bettersleeping.core.BSEvents;
 import foxie.bettersleeping.core.Core;
 import foxie.lib.Configurable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -119,5 +121,15 @@ public class TirednessModule extends Module {
    @SubscribeEvent
    public void onWorldSleepPre(WorldSleepEvent.Pre event) {
       // TODO calculate time
+   }
+
+   @SubscribeEvent
+   public void isPlayerAllowedToSleep(PlayerSleepInBedEvent event) {
+      PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.entityPlayer);
+
+      if (data.getEnergy() > maximumEnergy && capEnergy) {
+         event.entityPlayer.addChatMessage(new ChatComponentTranslation("message.notTired"));
+         event.result = EntityPlayer.EnumStatus.OTHER_PROBLEM;
+      }
    }
 }

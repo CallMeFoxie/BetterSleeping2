@@ -11,7 +11,8 @@ public class BSEvents {
       PlayerSleepEvent.PlayerAllowedToSleepEvent allowedToSleep = new PlayerSleepEvent.PlayerAllowedToSleepEvent(player);
       MinecraftForge.EVENT_BUS.post(allowedToSleep);
 
-      return !allowedToSleep.isCanceled(); // negate the isCanceled because of how the vanilla code is setup
+      return allowedToSleep.isCanceled(); // double negate the isCanceled because of how the vanilla code is setup
+      // as it goes if true then cancel. Which is the same as here.
    }
 
    public static void playerFallingAsleep(EntityPlayer player) {

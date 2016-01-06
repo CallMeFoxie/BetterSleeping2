@@ -1,3 +1,4 @@
 death.attack.coffeeOverdose=%s has died from coffee overdose!
 death.attack.pillOverdose=%s has died from nomming on too many pills!
 death.attack.tiredness=%s has tired themselves to death!
+message.notTired=You are not tired enough to sleep!
