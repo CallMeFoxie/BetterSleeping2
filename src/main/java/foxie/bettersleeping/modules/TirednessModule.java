@@ -53,6 +53,9 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void playerTick(TickEvent.PlayerTickEvent event) {
+      if (event.player.worldObj.isRemote)
+         return;
+
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
 
       if (!event.player.isPlayerSleeping() && event.player.isEntityAlive()) {

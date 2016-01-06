@@ -23,6 +23,11 @@ public class PlayerBSData implements IPlayerData {
       this.player = player;
    }
 
+   public PlayerBSData(EntityPlayer player, long spawnEnergy) {
+      this(player);
+      this.energy = spawnEnergy;
+   }
+
    public EntityPlayer getPlayer() {
       return player;
    }

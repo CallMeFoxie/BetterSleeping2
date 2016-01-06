@@ -8,8 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class SaveHandler {
 
    public static PlayerBSData getDataFor(EntityPlayer player) {
-      PlayerBSData prototype = new PlayerBSData(player);
-      prototype.setEnergy(TirednessModule.getSpawnEnergy());
+      PlayerBSData prototype = new PlayerBSData(player, TirednessModule.getSpawnEnergy());
 
       FoxieSavedData.instance().getPlayerData(player, prototype);
 

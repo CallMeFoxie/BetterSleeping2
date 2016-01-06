@@ -1,0 +1,36 @@
+package foxie.bettersleeping.commands;
+
+import foxie.bettersleeping.api.BetterSleepingAPI;
+import foxie.bettersleeping.api.PlayerBSData;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentTranslation;
+
+public class CommandSetEnergy extends CommandBase {
+   @Override
+   public String getCommandName() {
+      return "setenergy";
+   }
+
+   @Override
+   public String getCommandUsage(ICommandSender sender) {
+      return "setenergy <new tiredness>";
+   }
+
+   @Override
+   public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+      if (args.length == 0)
+         return;
+
+      if (sender instanceof EntityPlayer) {
+         EntityPlayer player = (EntityPlayer) sender;
+
+         PlayerBSData data = BetterSleepingAPI.getSleepingProperty(player);
+
+         data.setEnergy(Long.decode(args[0]));
+         sender.addChatMessage(new ChatComponentTranslation("message.energySet"));
+      }
+   }
+}

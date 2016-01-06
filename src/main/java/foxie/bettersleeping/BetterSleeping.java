@@ -1,5 +1,6 @@
 package foxie.bettersleeping;
 
+import foxie.bettersleeping.commands.CommandCollection;
 import foxie.bettersleeping.modules.Modules;
 import foxie.bettersleeping.proxy.ProxyCommon;
 import foxie.lib.FoxieSavedData;
@@ -93,6 +94,7 @@ public class BetterSleeping implements IFoxieMod {
 
    @Mod.EventHandler
    public void onServerStarting(FMLServerStartingEvent event) {
+      CommandCollection.register(event);
       modules.serverStarting(event);
    }
 }
