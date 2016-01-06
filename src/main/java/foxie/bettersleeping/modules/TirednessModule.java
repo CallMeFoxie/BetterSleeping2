@@ -14,6 +14,9 @@ import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TirednessModule extends Module {
    public static DamageSource tirednessDamage = new DamageSource("tiredness").setDamageBypassesArmor();
 
@@ -83,22 +86,18 @@ public class TirednessModule extends Module {
          return;
 
       // take care of possible sleeping
-      boolean allPlayersAsleep = true;
-      int playersAsleep = 0;
+      List<EntityPlayer> asleepPlayers = new ArrayList<EntityPlayer>();
       for (EntityPlayer player : event.world.playerEntities) {
          if (!player.isEntityAlive())
             continue;
 
-         if (!player.isPlayerFullyAsleep() || !BSEvents.isPlayerAllowedToSleep(player)) {
-            allPlayersAsleep = false;
-            break;
-         } else {
-            playersAsleep++;
+         if (player.isPlayerFullyAsleep() && !BSEvents.isPlayerAllowedToSleep(player)) {
+            asleepPlayers.add(player);
          }
       }
 
       // take care of legit sleeping
-      if (allPlayersAsleep && playersAsleep > 0) {
+      if (asleepPlayers.size() == event.world.playerEntities.size() && asleepPlayers.size() > 0) {
          for (EntityPlayer player : event.world.playerEntities) {
             BSEvents.playerFallingAsleep(player);
          }
