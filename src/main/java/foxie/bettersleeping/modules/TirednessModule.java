@@ -132,7 +132,7 @@ public class TirednessModule extends Module {
    @SubscribeEvent
    public void onWorldSleepPre(WorldSleepEvent.Pre event) {
       if (!wakeupOnCap) {
-         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world.provider.getWorldTime());
+         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world);
          // wake up by normal day cycles
          if (calendar.getHour() > wakeupHour) {
             calendar.setScaledDay(calendar.getScaledDay() + 1);
@@ -140,7 +140,7 @@ public class TirednessModule extends Module {
 
          calendar.setHour(wakeupHour);
 
-         event.setSleptTime(calendar.getTime() - CalendarAPI.getCalendarInstance(event.world.provider.getWorldTime()).getTime(), WorldSleepEvent.PRIORITY_BUILTIN);
+         event.setSleptTime(calendar.getTime() - CalendarAPI.getCalendarInstance(event.world).getTime(), WorldSleepEvent.PRIORITY_BUILTIN);
 
       } else {
          long ticks = event.world.provider.getWorldTime();
