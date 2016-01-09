@@ -14,6 +14,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
@@ -131,13 +132,16 @@ public class TirednessModule extends Module {
    @SubscribeEvent
    public void onWorldSleepPre(WorldSleepEvent.Pre event) {
       if (!wakeupOnCap) {
-         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world);
+         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world.provider.getWorldTime());
          // wake up by normal day cycles
-         if (calendar.getScaledHour() > wakeupHour) {
+         if (calendar.getHour() > wakeupHour) {
             calendar.setScaledDay(calendar.getScaledDay() + 1);
          }
 
-         CalendarAPI.getCalendarInstance(event.world).setScaledHour(wakeupHour);
+         calendar.setHour(wakeupHour);
+
+         event.setSleptTime(calendar.getTime() - CalendarAPI.getCalendarInstance(event.world.provider.getWorldTime()).getTime(), WorldSleepEvent.PRIORITY_BUILTIN);
+
       } else {
          long ticks = event.world.provider.getWorldTime();
 
@@ -152,7 +156,7 @@ public class TirednessModule extends Module {
          // possibly sleep? (maxEnergy - currentEnergy) / regainedEnergyPerSleptTick
          ticks += (maximumEnergy - maxSleep) / regainedEnergyPerSleptTick;
 
-         event.world.provider.setWorldTime(ticks);
+         event.setSleptTime(ticks - event.world.provider.getWorldTime(), WorldSleepEvent.PRIORITY_BUILTIN);
       }
    }
 
@@ -164,5 +168,11 @@ public class TirednessModule extends Module {
          event.entityPlayer.addChatMessage(new ChatComponentTranslation("message.notTired"));
          event.result = EntityPlayer.EnumStatus.OTHER_PROBLEM;
       }
+   }
+
+   @SubscribeEvent
+   public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+      PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
+      data.setEnergy(energyToSpawnWith);
    }
 }
