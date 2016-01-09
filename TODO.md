@@ -101,3 +101,8 @@ People module (requires lots of code), Compat module (requires APIs to be update
  \[ \] - if reconnects near a bed wake them up with full sleep bar
   
  \[ \] - if reconnects not near a bed wake them up with \<expected for 24h cycle\> sleep bar 
+ 
+### Random module
+
+ \[X\] - Set spawn without sleeping option
+ 

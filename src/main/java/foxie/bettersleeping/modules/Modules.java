@@ -23,6 +23,7 @@ public class Modules {
       modules.add(new PeopleModule());
       modules.add(new PillModule());
       modules.add(new TirednessModule());
+      modules.add(new RandomModule());
    }
 
    public void preinit(FMLPreInitializationEvent event) {
