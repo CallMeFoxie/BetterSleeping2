@@ -56,7 +56,7 @@ People module (requires lots of code), Compat module (requires APIs to be update
 ### Coffee module
  \[ \] - caffeine overdose
  
- \[ \] - removing tiredness on drinking a coffee
+ \[ \] - adding energy on drinking a coffee
  
  
 
@@ -82,7 +82,7 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
 
 ### Tiredness module
- \[ \] - sending the current tiredness to the player
+ \[ \] - sending the current energy to the player
   
  \[X\] - fall asleep if overly tired
  

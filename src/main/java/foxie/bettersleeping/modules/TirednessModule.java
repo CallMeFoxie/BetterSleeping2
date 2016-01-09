@@ -6,6 +6,8 @@ import foxie.bettersleeping.api.PlayerSleepEvent;
 import foxie.bettersleeping.api.WorldSleepEvent;
 import foxie.bettersleeping.core.BSEvents;
 import foxie.bettersleeping.core.Core;
+import foxie.calendar.api.CalendarAPI;
+import foxie.calendar.api.ICalendarProvider;
 import foxie.lib.Configurable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
@@ -26,6 +28,8 @@ public class TirednessModule extends Module {
    private static boolean capEnergy                  = true;
    @Configurable(comment = "Maximum energy to allow sleeping at")
    private static long    maximumEnergy              = 24000;
+   @Configurable(comment = "Minimum energy to allow sleeping at")
+   private static long    minimumEnergy              = 8000;
    @Configurable(comment = "At which energy the player falls asleep on the ground (-1 to disable)")
    private static long    sleepOnGroundAt            = 200;
    @Configurable(comment = "How much energy is lost per awake tick", min = "0")
@@ -34,6 +38,10 @@ public class TirednessModule extends Module {
    private static long    energyToSpawnWith          = 48000;
    @Configurable(comment = "Should player die when they reach zero energy? (if sleeping on the ground at == 0 then they will die first)")
    private static boolean dieOnExhaustion            = true;
+   @Configurable(comment = "Wake up time (24h day cycle, morning = 6h)")
+   private static int     wakeupHour                 = 6;
+   @Configurable(comment = "Wake up with sleeping cap")
+   private static boolean wakeupOnCap                = false;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
@@ -72,7 +80,7 @@ public class TirednessModule extends Module {
          if (data.getEnergy() <= sleepOnGroundAt) {
             Core.trySleepingPlayerOnTheGround(event.player);
          }
-      } else {
+      } else if (event.player.isPlayerSleeping()) {
          data.addEnergy((long) regainedEnergyPerSleptTick);
       }
    }
@@ -122,14 +130,37 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void onWorldSleepPre(WorldSleepEvent.Pre event) {
-      // TODO calculate time
+      if (!wakeupOnCap) {
+         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world);
+         // wake up by normal day cycles
+         if (calendar.getScaledHour() > wakeupHour) {
+            calendar.setScaledDay(calendar.getScaledDay() + 1);
+         }
+
+         CalendarAPI.getCalendarInstance(event.world).setScaledHour(wakeupHour);
+      } else {
+         long ticks = event.world.provider.getWorldTime();
+
+         long maxSleep = 0;
+
+         for (EntityPlayer player : event.world.playerEntities) {
+            PlayerBSData data = BetterSleepingAPI.getSleepingProperty(player);
+            if (data.getEnergy() > maxSleep)
+               maxSleep = data.getEnergy();
+         }
+
+         // possibly sleep? (maxEnergy - currentEnergy) / regainedEnergyPerSleptTick
+         ticks += (maximumEnergy - maxSleep) / regainedEnergyPerSleptTick;
+
+         event.world.provider.setWorldTime(ticks);
+      }
    }
 
    @SubscribeEvent
    public void isPlayerAllowedToSleep(PlayerSleepInBedEvent event) {
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.entityPlayer);
 
-      if (data.getEnergy() > maximumEnergy && capEnergy) {
+      if (data.getEnergy() > maximumEnergy && capEnergy || data.getEnergy() > minimumEnergy) {
          event.entityPlayer.addChatMessage(new ChatComponentTranslation("message.notTired"));
          event.result = EntityPlayer.EnumStatus.OTHER_PROBLEM;
       }
