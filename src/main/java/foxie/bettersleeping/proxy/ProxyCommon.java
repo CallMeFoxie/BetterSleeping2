@@ -10,8 +10,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class ProxyCommon {
    public void preinit(FMLPreInitializationEvent event) {
       new Network();
-      Network.initClient();
-
       new EventHandlers();
    }
 

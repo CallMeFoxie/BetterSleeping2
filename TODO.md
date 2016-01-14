@@ -76,13 +76,13 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
  \[ \] - disallow sleeping on some beds, just dozing off to set the spawn
  
- \[ \] - allow setting the spawn even during the daytime
+ \[X\] - allow setting the spawn even during the daytime
  
  \[ \] - allow setting when allowed to go to sleep
  
 
 ### Tiredness module
- \[ \] - sending the current energy to the player
+ \[X\] - sending the current energy to the player
   
  \[X\] - fall asleep if overly tired
  

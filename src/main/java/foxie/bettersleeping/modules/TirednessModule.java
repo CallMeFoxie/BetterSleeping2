@@ -1,15 +1,20 @@
 package foxie.bettersleeping.modules;
 
+import foxie.bettersleeping.BetterSleeping;
+import foxie.bettersleeping.PlayerSyncStatus;
 import foxie.bettersleeping.api.BetterSleepingAPI;
 import foxie.bettersleeping.api.PlayerBSData;
 import foxie.bettersleeping.api.PlayerSleepEvent;
 import foxie.bettersleeping.api.WorldSleepEvent;
 import foxie.bettersleeping.core.BSEvents;
 import foxie.bettersleeping.core.Core;
+import foxie.bettersleeping.network.MessageUpdateTiredness;
+import foxie.bettersleeping.network.Network;
 import foxie.calendar.api.CalendarAPI;
 import foxie.calendar.api.ICalendarProvider;
 import foxie.lib.Configurable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
@@ -21,31 +26,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TirednessModule extends Module {
-   public static DamageSource tirednessDamage = new DamageSource("tiredness").setDamageBypassesArmor();
-
+   public static  DamageSource tirednessDamage            = new DamageSource("tiredness").setDamageBypassesArmor();
    @Configurable(comment = "How much energy is regained per slept tick", min = "0")
-   private static double  regainedEnergyPerSleptTick = 3;
+   private static double       regainedEnergyPerSleptTick = 3;
    @Configurable(comment = "Disable overcharging energy")
-   private static boolean capEnergy                  = true;
+   private static boolean      capEnergy                  = true;
    @Configurable(comment = "Maximum energy to allow sleeping at")
-   private static long    maximumEnergy              = 24000;
+   private static long         maximumEnergy              = 24000;
    @Configurable(comment = "Minimum energy to allow sleeping at")
-   private static long    minimumEnergy              = 8000;
+   private static long         minimumEnergy              = 8000;
    @Configurable(comment = "At which energy the player falls asleep on the ground (-1 to disable)")
-   private static long    sleepOnGroundAt            = 200;
+   private static long         sleepOnGroundAt            = 200;
    @Configurable(comment = "How much energy is lost per awake tick", min = "0")
-   private static long    energyPerAwakeTick         = 1;
+   private static long         energyPerAwakeTick         = 1;
    @Configurable(comment = "Energy to spawn with", min = "0")
-   private static long    energyToSpawnWith          = 48000;
+   private static long         energyToSpawnWith          = 48000;
    @Configurable(comment = "Should player die when they reach zero energy? (if sleeping on the ground at == 0 then they will die first)")
-   private static boolean dieOnExhaustion            = true;
+   private static boolean      dieOnExhaustion            = true;
    @Configurable(comment = "Wake up time (24h day cycle, morning = 6h)")
-   private static int     wakeupHour                 = 6;
+   private static int          wakeupHour                 = 6;
    @Configurable(comment = "Wake up with sleeping cap")
-   private static boolean wakeupOnCap                = false;
+   private static boolean      wakeupOnCap                = false;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
+   }
+
+   public static long getGranularity() {
+      return maximumEnergy / 24;
    }
 
    @SubscribeEvent
@@ -83,6 +91,13 @@ public class TirednessModule extends Module {
          }
       } else if (event.player.isPlayerSleeping()) {
          data.addEnergy((long) regainedEnergyPerSleptTick);
+      }
+
+      // check for resyncing
+      PlayerSyncStatus status = BetterSleeping.INSTANCE.getSyncData(event.player);
+      if (Math.abs(status.lastSyncEnergy - data.getEnergy()) > getGranularity() && event.player instanceof EntityPlayerMP) {
+         Network.networkChannel.sendTo(new MessageUpdateTiredness(data.getEnergy(), maximumEnergy), (EntityPlayerMP) event.player);
+         status.lastSyncEnergy = data.getEnergy();
       }
    }
 
