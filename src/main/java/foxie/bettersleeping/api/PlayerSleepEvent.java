@@ -24,6 +24,7 @@ public abstract class PlayerSleepEvent extends PlayerEvent {
          super(player);
       }
    }
+
    public static class PlayerFallingAsleepEvent extends PlayerSleepEvent {
       public PlayerFallingAsleepEvent(EntityPlayer player) {
          super(player);
@@ -51,6 +52,20 @@ public abstract class PlayerSleepEvent extends PlayerEvent {
 
       public long getTime() {
          return this.time;
+      }
+   }
+
+   @Cancelable
+   public static class IsPlayerFullyAsleepEvent extends PlayerEvent {
+      private int timer;
+
+      public IsPlayerFullyAsleepEvent(EntityPlayer player, int timer) {
+         super(player);
+         this.timer = timer;
+      }
+
+      public int getTimer() {
+         return this.timer;
       }
    }
 }

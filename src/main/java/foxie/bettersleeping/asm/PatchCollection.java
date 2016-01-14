@@ -1,9 +1,6 @@
 package foxie.bettersleeping.asm;
 
-import foxie.bettersleeping.asm.patches.ClassPatch;
-import foxie.bettersleeping.asm.patches.PatchIsDay;
-import foxie.bettersleeping.asm.patches.PatchIsInBed;
-import foxie.bettersleeping.asm.patches.PatchSleepNether;
+import foxie.bettersleeping.asm.patches.*;
 import foxie.lib.FoxLog;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
@@ -22,10 +19,12 @@ public class PatchCollection implements IClassTransformer {
       addPatch("net.minecraft.entity.player.EntityPlayer", PatchIsDay.class);
       addPatch("net.minecraft.entity.player.EntityPlayer", PatchIsInBed.class);
       addPatch("net.minecraft.world.WorldProviderHell", PatchSleepNether.class);
+      addPatch("net.minecraft.entity.player.EntityPlayer", PatchIsPlayerAsleep.class);
 
       addPatch("wn", PatchIsDay.class);
       addPatch("wn", PatchIsInBed.class);
       addPatch("ann", PatchSleepNether.class);
+      addPatch("wn", PatchIsPlayerAsleep.class);
    }
 
    public static void addPatch(String classname, Class<? extends ClassPatch> patch) {

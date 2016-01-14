@@ -1,6 +1,7 @@
 package foxie.bettersleeping.asm.patches;
 
 import foxie.bettersleeping.asm.MethodToPatch;
+import net.minecraft.launchwrapper.Launch;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -15,6 +16,10 @@ public abstract class ClassPatch extends ClassVisitor {
 
    public ClassPatch(ClassWriter writer) {
       super(Opcodes.ASM4, writer);
+   }
+
+   public static Boolean isDeobfuscatedEnvironment() {
+      return (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
    }
 
    public abstract MethodVisitor patchedVisitor(MethodVisitor parent);

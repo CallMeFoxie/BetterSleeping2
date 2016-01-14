@@ -43,4 +43,10 @@ public class BSEvents {
       WorldSleepEvent.Post event = new WorldSleepEvent.Post(world, timeSlept);
       MinecraftForge.EVENT_BUS.post(event);
    }
+
+   public static boolean isPlayerFullyAsleep(EntityPlayer player, int timer) {
+      PlayerSleepEvent.IsPlayerFullyAsleepEvent event = new PlayerSleepEvent.IsPlayerFullyAsleepEvent(player, timer);
+      MinecraftForge.EVENT_BUS.post(event);
+      return !event.isCanceled();
+   }
 }

@@ -47,6 +47,8 @@ public class TirednessModule extends Module {
    private static int          wakeupHour                 = 6;
    @Configurable(comment = "Wake up with sleeping cap")
    private static boolean      wakeupOnCap                = false;
+   @Configurable(comment = "Ticks before a player falls asleep", min = "0", max = "100")
+   private static int          dozingTimer                = 100;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
@@ -189,5 +191,11 @@ public class TirednessModule extends Module {
    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
       data.setEnergy(energyToSpawnWith);
+   }
+
+   @SubscribeEvent
+   public void isPlayerFullyAsleep(PlayerSleepEvent.IsPlayerFullyAsleepEvent event) {
+      if (!event.entityPlayer.isPlayerSleeping() || event.getTimer() < dozingTimer)
+         event.setCanceled(true);
    }
 }

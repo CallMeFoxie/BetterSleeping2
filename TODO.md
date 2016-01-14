@@ -35,6 +35,10 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
  \[X\] - fire
  
+ \[X\] - overriding dozing off timer and rules
+ 
+ \[X\] - fire
+ 
  
  
 ### Alarm module
@@ -91,6 +95,8 @@ People module (requires lots of code), Compat module (requires APIs to be update
  \[ \] - eat hunger when waking up
  
  \[ \] - debuffs when sleeping on the ground
+ 
+ \[X\] - allow changing dozing timer
  
 ### People module
 
