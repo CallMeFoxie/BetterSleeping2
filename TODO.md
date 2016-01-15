@@ -98,6 +98,17 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
  \[X\] - allow changing dozing timer
  
+### Debuff module
+ \[ \] - Option to enable/disable any debuff (potion effect)
+ 
+ \[ \] - Tiredness level at which it activates
+ 
+ \[ \] - To which level it scales
+ 
+ \[ \] - Sleeping on the ground debuffs
+ 
+ \[ \] - Sleeping in bed (de)buffs
+ 
 ### People module
 
  \[ \] - keep people in world even when they disconnect
@@ -111,4 +122,6 @@ People module (requires lots of code), Compat module (requires APIs to be update
 ### Random module
 
  \[X\] - Set spawn without sleeping option
+ 
+ \[ \] - (not) resetting weather on sleeping
  
