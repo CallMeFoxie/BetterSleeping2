@@ -14,6 +14,9 @@ public class BedModule extends Module {
 
    @SubscribeEvent
    public void isProperTime(PlayerSleepInBedEvent event) {
+      if (event.entityPlayer.worldObj.isRemote)
+         return;
+
       long time = event.entityPlayer.worldObj.getWorldTime() % 24000;
       if (time < minTime && minTime >= -1 || time > maxTime && minTime >= -1) {
          event.entityPlayer.addChatComponentMessage(new ChatComponentTranslation("message.notSleepNow"));

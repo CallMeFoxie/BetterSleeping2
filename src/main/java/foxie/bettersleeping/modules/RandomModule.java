@@ -38,6 +38,9 @@ public class RandomModule extends Module {
 
    @SubscribeEvent
    public void onWorldSlept(WorldSleepEvent.Post event) {
+      if (event.world.isRemote)
+         return;
+
       if (event.world.rand.nextDouble() < chanceToStopRain)
          event.world.provider.resetRainAndThunder();
    }

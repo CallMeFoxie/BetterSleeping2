@@ -60,6 +60,9 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void playerSlept(PlayerSleepEvent.PlayerSleptEvent event) {
+      if (event.getPlayer().worldObj.isRemote)
+         return;
+
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.getPlayer());
 
       long currentEnergy = data.getEnergy();
@@ -105,6 +108,9 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void sleepOnGroundEvent(PlayerSleepEvent.SleepOnGroundEvent event) {
+      if (event.getPlayer().worldObj.isRemote)
+         return;
+
       if (sleepOnGroundAt < 0 && event.isCancelable())
          event.setCanceled(true);
    }
@@ -148,6 +154,9 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void onWorldSleepPre(WorldSleepEvent.Pre event) {
+      if (event.world.isRemote)
+         return;
+
       if (!wakeupOnCap) {
          ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world);
          // wake up by normal day cycles
@@ -179,6 +188,9 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void isPlayerAllowedToSleep(PlayerSleepInBedEvent event) {
+      if (event.entityPlayer.worldObj.isRemote)
+         return;
+
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.entityPlayer);
 
       if (data.getEnergy() > maximumEnergy && capEnergy || data.getEnergy() > minimumEnergy) {
@@ -189,12 +201,18 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+      if (event.player.worldObj.isRemote)
+         return;
+
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
       data.setEnergy(energyToSpawnWith);
    }
 
    @SubscribeEvent
    public void isPlayerFullyAsleep(PlayerSleepEvent.IsPlayerFullyAsleepEvent event) {
+      if (event.entityPlayer.worldObj.isRemote)
+         return;
+
       if (!event.entityPlayer.isPlayerSleeping() || event.getTimer() < dozingTimer)
          event.setCanceled(true);
    }
