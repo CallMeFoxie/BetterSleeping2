@@ -82,7 +82,7 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
  \[X\] - allow setting the spawn even during the daytime
  
- \[ \] - allow setting when allowed to go to sleep
+ \[X\] - allow setting when allowed to go to sleep
  
 
 ### Tiredness module
@@ -123,5 +123,5 @@ People module (requires lots of code), Compat module (requires APIs to be update
 
  \[X\] - Set spawn without sleeping option
  
- \[ \] - (not) resetting weather on sleeping
+ \[X\] - (not) resetting weather on sleeping (chance)
  

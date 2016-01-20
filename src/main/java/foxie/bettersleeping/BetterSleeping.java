@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -53,7 +54,8 @@ public class BetterSleeping implements IFoxieMod {
       //Config c = new Config(event.getSuggestedConfigurationFile().getAbsolutePath());
       // TODO fix oldschool config loading
 
-      libConfig = new foxie.lib.Config(event.getSuggestedConfigurationFile());
+      libConfig = new foxie.lib.Config(new File(event.getModConfigurationDirectory().getPath() +
+              "/" + BetterSleeping.MODID + "/baseconfig.cfg"));
       proxy.preinit(event);
       modules = new Modules();
       modules.preinit(event);

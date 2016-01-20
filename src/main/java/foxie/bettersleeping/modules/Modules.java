@@ -20,6 +20,7 @@ public class Modules {
       modules.add(new BedModule());
       modules.add(new CoffeeModule());
       modules.add(new CompatModule());
+      modules.add(new DebuffModule());
       modules.add(new PeopleModule());
       modules.add(new PillModule());
       modules.add(new TirednessModule());
