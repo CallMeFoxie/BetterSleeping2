@@ -2,14 +2,21 @@ package foxie.bettersleeping.modules;
 
 import foxie.bettersleeping.BetterSleeping;
 import foxie.bettersleeping.api.BetterSleepingAPI;
+import foxie.bettersleeping.api.PlayerBSData;
 import foxie.bettersleeping.api.PlayerDebuff;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.io.File;
+import java.util.List;
 
 public class DebuffModule extends Module {
+   private static final int POTION_DURATION = 80;
+
    @Override
    public void preinit(FMLPreInitializationEvent event) {
       super.preinit(event);
@@ -42,5 +49,24 @@ public class DebuffModule extends Module {
 
       if (cfg.hasChanged())
          cfg.save();
+   }
+
+   @SubscribeEvent
+   public void playerTick(TickEvent.PlayerTickEvent event) {
+      if (event.phase != TickEvent.Phase.START || event.player.worldObj.isRemote)
+         return;
+
+      PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
+
+      List<PlayerDebuff> debuffs = BetterSleepingAPI.getDebuffs();
+
+      for (PlayerDebuff debuff : debuffs) {
+         if (debuff.enable && data.getEnergy() < debuff.tiredLevel) {
+            double percentTired = (debuff.tiredLevel - data.getEnergy()) / (double) (debuff.tiredLevel);
+            int scale = (int) Math.ceil(percentTired * debuff.maxScale) - 1;
+            event.player.addPotionEffect(
+                    new PotionEffect(debuff.potion.getId(), POTION_DURATION * 2, scale));
+         }
+      }
    }
 }

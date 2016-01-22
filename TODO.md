@@ -99,11 +99,11 @@ People module (requires lots of code), Compat module (requires APIs to be update
  \[X\] - allow changing dozing timer
  
 ### Debuff module
- \[ \] - Option to enable/disable any debuff (potion effect)
+ \[X\] - Option to enable/disable any debuff (potion effect)
  
- \[ \] - Tiredness level at which it activates
+ \[X\] - Tiredness level at which it activates
  
- \[ \] - To which level it scales
+ \[X\] - To which level it scales
  
  \[ \] - Sleeping on the ground debuffs
  
