@@ -39,5 +39,8 @@ public class DebuffModule extends Module {
       for (PlayerDebuff debuff : debuffs) {
          BetterSleepingAPI.addDebuff(debuff);
       }
+
+      if (cfg.hasChanged())
+         cfg.save();
    }
 }
