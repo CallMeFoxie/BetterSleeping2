@@ -92,9 +92,7 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
  \[X\] - die if overly tired
  
- \[ \] - eat hunger when waking up
- 
- \[ \] - debuffs when sleeping on the ground
+ \[X\] - eat hunger when waking up
  
  \[X\] - allow changing dozing timer
  
@@ -105,9 +103,9 @@ People module (requires lots of code), Compat module (requires APIs to be update
  
  \[X\] - To which level it scales
  
- \[ \] - Sleeping on the ground debuffs
+ \[X\] - Sleeping on the ground debuffs
  
- \[ \] - Sleeping in bed (de)buffs
+ \[X\] - Sleeping in bed (de)buffs
  
 ### People module
 

@@ -4,6 +4,9 @@ import foxie.bettersleeping.BetterSleeping;
 import foxie.bettersleeping.api.BetterSleepingAPI;
 import foxie.bettersleeping.api.PlayerBSData;
 import foxie.bettersleeping.api.PlayerDebuff;
+import foxie.bettersleeping.api.PlayerSleepEvent;
+import foxie.lib.Configurable;
+import foxie.lib.FoxLog;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.config.Configuration;
@@ -16,6 +19,15 @@ import java.util.List;
 
 public class DebuffModule extends Module {
    private static final int POTION_DURATION = 80;
+
+   @Configurable(comment = "Potion IDs of random effects when sleeping on the ground")
+   private static int[] sleepOnGroundPotionIds    = {2, 9};
+   @Configurable(comment = "Effect length of sleeping on the ground")
+   private static int   sleepOnGroundPotionLength = 100;
+   @Configurable(comment = "Potion IDs of random effects when sleeping")
+   private static int[] sleepInBedPotionIds       = {6, 21, 10, 11};
+   @Configurable(comment = "Effect length of sleeping")
+   private static int   sleepInBedPotionLength    = 100;
 
    @Override
    public void preinit(FMLPreInitializationEvent event) {
@@ -68,5 +80,27 @@ public class DebuffModule extends Module {
                     new PotionEffect(debuff.potion.getId(), POTION_DURATION * 2, scale));
          }
       }
+   }
+
+   @SubscribeEvent
+   public void sleepOnGround(PlayerSleepEvent.SleepOnGroundEvent event) {
+      int potionId = sleepOnGroundPotionIds[event.getPlayer().worldObj.rand.nextInt(sleepOnGroundPotionIds.length)];
+      if (Potion.potionTypes.length >= potionId || Potion.potionTypes[potionId] == null) {
+         FoxLog.error("Tried applying bad potion type while sleeping on the ground. Potion ID: " + potionId);
+         return;
+      }
+
+      event.getPlayer().addPotionEffect(new PotionEffect(potionId, sleepOnGroundPotionLength));
+   }
+
+   @SubscribeEvent
+   public void sleepInBed(PlayerSleepEvent.PlayerSleptEvent event) {
+      int potionId = sleepInBedPotionIds[event.getPlayer().worldObj.rand.nextInt(sleepInBedPotionIds.length)];
+      if (Potion.potionTypes.length >= potionId || Potion.potionTypes[potionId] == null) {
+         FoxLog.error("Tried applying bad potion type while sleeping on the ground. Potion ID: " + potionId);
+         return;
+      }
+
+      event.getPlayer().addPotionEffect(new PotionEffect(potionId, sleepInBedPotionLength));
    }
 }
