@@ -51,6 +51,8 @@ public class TirednessModule extends Module {
    private static int          dozingTimer                = 100;
    @Configurable(comment = "How much food is taken by every slept tick", min = "0")
    private static double       hungerPerSleptTick         = 0.00001d;
+   @Configurable(comment = "Do players get tired? (Disables everything related)")
+   private static boolean      playersGetTired            = true;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
@@ -60,6 +62,10 @@ public class TirednessModule extends Module {
       return maximumEnergy / 24;
    }
 
+   public static boolean doPlayersGetTired() {
+      return playersGetTired;
+   }
+
    @SubscribeEvent
    public void playerSlept(PlayerSleepEvent.PlayerSleptEvent event) {
       if (event.getPlayer().worldObj.isRemote)
@@ -67,12 +73,13 @@ public class TirednessModule extends Module {
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.getPlayer());
 
-      long currentEnergy = data.getEnergy();
-
-      if (capEnergy)
-         data.setEnergy((long) Math.min(maximumEnergy, currentEnergy + event.getTime() * regainedEnergyPerSleptTick));
-      else
-         data.addEnergy((long) (event.getTime() * regainedEnergyPerSleptTick));
+      if (playersGetTired) {
+         long currentEnergy = data.getEnergy();
+         if (capEnergy)
+            data.setEnergy((long) Math.min(maximumEnergy, currentEnergy + event.getTime() * regainedEnergyPerSleptTick));
+         else
+            data.addEnergy((long) (event.getTime() * regainedEnergyPerSleptTick));
+      }
 
       // take care of hunger eating
       double decreaseHunger = Math.max(0, event.getTime() * hungerPerSleptTick);
@@ -81,7 +88,7 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void playerTick(TickEvent.PlayerTickEvent event) {
-      if (event.player.worldObj.isRemote)
+      if (event.player.worldObj.isRemote || !playersGetTired)
          return;
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
@@ -194,7 +201,7 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void isPlayerAllowedToSleep(PlayerSleepInBedEvent event) {
-      if (event.entityPlayer.worldObj.isRemote)
+      if (event.entityPlayer.worldObj.isRemote || !playersGetTired)
          return;
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.entityPlayer);
@@ -221,5 +228,13 @@ public class TirednessModule extends Module {
 
       if (!event.entityPlayer.isPlayerSleeping() || event.getTimer() < dozingTimer)
          event.setCanceled(true);
+   }
+
+   @Override
+   public void playerJoined(PlayerEvent.PlayerLoggedInEvent event) {
+      super.playerJoined(event);
+      if (!doPlayersGetTired() && event.player instanceof EntityPlayerMP) {
+         Network.networkChannel.sendTo(new MessageUpdateTiredness(0, -1), (EntityPlayerMP) event.player); // send the client info that we are not going to use this
+      }
    }
 }
