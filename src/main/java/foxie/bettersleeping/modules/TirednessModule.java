@@ -49,6 +49,8 @@ public class TirednessModule extends Module {
    private static boolean      wakeupOnCap                = false;
    @Configurable(comment = "Ticks before a player falls asleep", min = "0", max = "100")
    private static int          dozingTimer                = 100;
+   @Configurable(comment = "How much food is taken by every slept tick", min = "0")
+   private static double       hungerPerSleptTick         = 0.00001d;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
@@ -71,6 +73,10 @@ public class TirednessModule extends Module {
          data.setEnergy((long) Math.min(maximumEnergy, currentEnergy + event.getTime() * regainedEnergyPerSleptTick));
       else
          data.addEnergy((long) (event.getTime() * regainedEnergyPerSleptTick));
+
+      // take care of hunger eating
+      double decreaseHunger = Math.max(0, event.getTime() * hungerPerSleptTick);
+      event.getPlayer().getFoodStats().addStats((int) -decreaseHunger, 0f);
    }
 
    @SubscribeEvent
