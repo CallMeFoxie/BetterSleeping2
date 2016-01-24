@@ -3,6 +3,7 @@ package foxie.bettersleeping;
 import foxie.bettersleeping.commands.CommandCollection;
 import foxie.bettersleeping.modules.Modules;
 import foxie.bettersleeping.proxy.ProxyCommon;
+import foxie.lib.Config;
 import foxie.lib.FoxieSavedData;
 import foxie.lib.IFoxieMod;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,8 +36,8 @@ public class BetterSleeping implements IFoxieMod {
 
    public HashMap<UUID, PlayerSyncStatus> syncData;
    FoxieSavedData playerData;
-   private foxie.lib.Config libConfig;
-   private Modules          modules;
+   private Config  libConfig;
+   private Modules modules;
 
    public BetterSleeping() {
       syncData = new HashMap<UUID, PlayerSyncStatus>();
@@ -54,7 +55,7 @@ public class BetterSleeping implements IFoxieMod {
       //Config c = new Config(event.getSuggestedConfigurationFile().getAbsolutePath());
       // TODO fix oldschool config loading
 
-      libConfig = new foxie.lib.Config(new File(event.getModConfigurationDirectory().getPath() +
+      libConfig = new Config(new File(event.getModConfigurationDirectory().getPath() +
               "/" + BetterSleeping.MODID + "/baseconfig.cfg"));
       proxy.preinit(event);
       modules = new Modules();
@@ -89,7 +90,7 @@ public class BetterSleeping implements IFoxieMod {
 
 
    @Override
-   public foxie.lib.Config getConfig() {
+   public Config getConfig() {
       return libConfig;
    }
 

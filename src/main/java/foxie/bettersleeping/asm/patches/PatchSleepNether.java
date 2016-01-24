@@ -1,6 +1,5 @@
 package foxie.bettersleeping.asm.patches;
 
-import foxie.bettersleeping.Config;
 import foxie.bettersleeping.asm.MethodToPatch;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldProviderHell;
@@ -28,7 +27,7 @@ public class PatchSleepNether extends ClassPatch {
       if ((stackTraceElements[3].getMethodName().equals("sleepInBedAt") || stackTraceElements[3].getMethodName().equals("a")) &&
               stackTraceElements[3].getClassName().equals("net.minecraft.entity.player.EntityPlayer") || stackTraceElements[3].getClassName()
               .equals("yz")) {
-         if (Loader.isModLoaded("harvestthenether") && provider instanceof WorldProviderHell && Config.enableSleepingNether) {
+         if (Loader.isModLoaded("harvestthenether") && provider instanceof WorldProviderHell) {
             return true;
          }
       }
