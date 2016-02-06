@@ -1,8 +1,8 @@
 package foxie.bettersleeping.asm;
 
 import foxie.bettersleeping.asm.patches.*;
-import foxie.lib.FoxLog;
 import net.minecraft.launchwrapper.IClassTransformer;
+import net.minecraftforge.fml.common.FMLLog;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -52,9 +52,9 @@ public class PatchCollection implements IClassTransformer {
                ClassVisitor patcher = patch.getDeclaredConstructor(ClassWriter.class).newInstance(wr);
                rd.accept(patcher, ClassReader.EXPAND_FRAMES);
                bytecode = wr.toByteArray();
-               FoxLog.info("Successfully patched " + origName + " with " + patch.toString());
+               FMLLog.info("Successfully patched " + origName + " with " + patch.toString());
             } catch (Exception e) {
-               FoxLog.error("Failed to patch class " + origName + " with " + patch.toString() + " :( - things will not work properly!");
+               FMLLog.warning("Failed to patch class " + origName + " with " + patch.toString() + " :( - things will not work properly!");
             }
          }
       }
