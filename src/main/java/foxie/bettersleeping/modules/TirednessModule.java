@@ -174,7 +174,7 @@ public class TirednessModule extends Module {
          ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world);
          // wake up by normal day cycles
          if (calendar.getHour() > wakeupHour) {
-            calendar.setScaledDay(calendar.getScaledDay() + 1);
+            calendar.setDay(calendar.getDay() + 1);
          }
 
          calendar.setHour(wakeupHour);
