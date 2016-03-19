@@ -66,6 +66,10 @@ public class TirednessModule extends Module {
       return playersGetTired;
    }
 
+   public static boolean isWakeupOnCap() {
+      return wakeupOnCap;
+   }
+
    @SubscribeEvent
    public void playerSlept(PlayerSleepEvent.PlayerSleptEvent event) {
       if (event.getPlayer().worldObj.isRemote)
