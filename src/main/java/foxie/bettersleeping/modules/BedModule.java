@@ -8,9 +8,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BedModule extends Module {
    @Configurable(comment = "Minimum day time to go to sleep at", min = "0", max = "23999")
-   public static long minTime = 18000;
+   public static int minTime = 18000;
    @Configurable(comment = "Maximum day time to go to sleep at", min = "0", max = "23999")
-   public static long maxTime = 23999;
+   public static int maxTime = 23999;
 
    @SubscribeEvent
    public void isProperTime(PlayerSleepInBedEvent event) {
