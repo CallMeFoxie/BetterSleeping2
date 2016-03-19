@@ -9,7 +9,7 @@ public class PatchIsPlayerAsleep extends ClassPatch {
    public PatchIsPlayerAsleep(ClassWriter writer) {
       super(writer);
       matchingMethods.add(new MethodToPatch("isPlayerFullyAsleep", "()Z"));
-      matchingMethods.add(new MethodToPatch("cf", "()Z"));
+      matchingMethods.add(new MethodToPatch("cM", "()Z"));
    }
 
    @Override
@@ -24,8 +24,8 @@ public class PatchIsPlayerAsleep extends ClassPatch {
       public PatchIsPlayerFullyAsleep(MethodVisitor visitor) {
          super(Opcodes.ASM4, visitor);
          if (!ClassPatch.isDeobfuscatedEnvironment()) {
-            className = "wn";
-            fieldName = "b";
+            className = "zj";
+            fieldName = "d";
          } else {
             className = "net/minecraft/entity/player/EntityPlayer";
             fieldName = "sleepTimer";

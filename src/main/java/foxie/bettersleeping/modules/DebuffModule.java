@@ -21,13 +21,13 @@ public class DebuffModule extends Module {
    private static final int POTION_DURATION = 80;
 
    @Configurable(comment = "Potion IDs of random effects when sleeping on the ground")
-   private static int[] sleepOnGroundPotionIds    = {2, 9};
+   private static String[] sleepOnGroundPotions = {"moveSlowdown", "confusion", "weakness"};
    @Configurable(comment = "Effect length of sleeping on the ground")
-   private static int   sleepOnGroundPotionLength = 100;
+   private static int sleepOnGroundPotionLength = 100;
    @Configurable(comment = "Potion IDs of random effects when sleeping")
-   private static int[] sleepInBedPotionIds       = {6, 21, 10, 11};
+   private static String[] sleepInBedPotions = {"resistance", "fire_resistance", "water_breathing", "absorbtion", "saturation", "levitation"};
    @Configurable(comment = "Effect length of sleeping")
-   private static int   sleepInBedPotionLength    = 100;
+   private static int sleepInBedPotionLength = 100;
 
    @Override
    public void preinit(FMLPreInitializationEvent event) {
@@ -39,15 +39,18 @@ public class DebuffModule extends Module {
       boolean[] defaultEnable = {true, true, false, false, true, false, true, false, false};
       int[] defaultTiredLevel = {800, 800, 800, 800, 800, 800, 800, 800, 800};
       int[] defaultMaxScale = {3, 3, 1, 1, 2, 1, 3, 1, 1};
-      int[] potionEffect = {Potion.moveSlowdown.getId(), Potion.digSlowdown.getId(), Potion.harm.getId(), Potion.confusion.getId(),
-              Potion.blindness.getId(), Potion.hunger.getId(), Potion.weakness.getId(), Potion.poison.getId(), Potion.wither.getId()};
+      //int[] potionEffect = {Potion.moveSlowdown.getId(), Potion.digSlowdown.getId(), Potion.harm.getId(), Potion.confusion.getId(),
+      //        Potion.blindness.getId(), Potion.hunger.getId(), Potion.weakness.getId(), Potion.poison.getId(), Potion.wither.getId()};
+      Potion[] potionEffect = new Potion[debuffNames.length];
+      for (int i = 0; i < potionEffect.length; i++)
+         potionEffect[i] = Potion.getPotionFromResourceLocation(debuffNames[i]);
 
       PlayerDebuff[] debuffs = new PlayerDebuff[debuffNames.length];
 
       for (int i = 0; i < debuffNames.length; i++) {
          String baseName = debuffNames[i];
          PlayerDebuff debuff = new PlayerDebuff();
-         debuff.potion = Potion.potionTypes[potionEffect[i]];
+         debuff.potion = potionEffect[i];
          debuff.enable = cfg.getBoolean(baseName + "_enable", "debuffs", defaultEnable[i], "Enable this debuff");
          debuff.maxScale = cfg.getInt(baseName + "_maxScale", "debuffs", defaultMaxScale[i], 0, 5, "Maximum scaling of this debuff");
          debuff.tiredLevel = cfg.getInt(baseName + "_level", "debuffs", defaultTiredLevel[i], 1, 23999, "At which level is this debuff " +
@@ -77,36 +80,36 @@ public class DebuffModule extends Module {
             double percentTired = (debuff.tiredLevel - data.getEnergy()) / (double) (debuff.tiredLevel);
             int scale = (int) Math.ceil(percentTired * debuff.maxScale) - 1;
             event.player.addPotionEffect(
-                    new PotionEffect(debuff.potion.getId(), POTION_DURATION * 2, scale));
+                    new PotionEffect(debuff.potion, POTION_DURATION * 2, scale));
          }
       }
    }
 
    @SubscribeEvent
    public void sleepOnGround(PlayerSleepEvent.SleepOnGroundEvent event) {
-      if (sleepOnGroundPotionIds.length == 0 || sleepOnGroundPotionLength == 0)
+      if (sleepOnGroundPotions.length == 0 || sleepOnGroundPotionLength == 0)
          return;
 
-      int potionId = sleepOnGroundPotionIds[event.getPlayer().worldObj.rand.nextInt(sleepOnGroundPotionIds.length)];
-      if (Potion.potionTypes.length >= potionId || Potion.potionTypes[potionId] == null) {
+      String potionId = sleepOnGroundPotions[event.getPlayer().worldObj.rand.nextInt(sleepOnGroundPotions.length)];
+      if (Potion.getPotionFromResourceLocation(potionId) == null) {
          FoxLog.error("Tried applying bad potion type while sleeping on the ground. Potion ID: " + potionId);
          return;
       }
 
-      event.getPlayer().addPotionEffect(new PotionEffect(potionId, sleepOnGroundPotionLength));
+      event.getPlayer().addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(potionId), sleepOnGroundPotionLength));
    }
 
    @SubscribeEvent
    public void sleepInBed(PlayerSleepEvent.PlayerSleptEvent event) {
-      if (sleepInBedPotionIds.length == 0 || sleepInBedPotionLength == 0)
+      if (sleepInBedPotions.length == 0 || sleepInBedPotionLength == 0)
          return;
 
-      int potionId = sleepInBedPotionIds[event.getPlayer().worldObj.rand.nextInt(sleepInBedPotionIds.length)];
-      if (Potion.potionTypes.length >= potionId || Potion.potionTypes[potionId] == null) {
+      String potionId = sleepInBedPotions[event.getPlayer().worldObj.rand.nextInt(sleepInBedPotions.length)];
+      if (Potion.getPotionFromResourceLocation(potionId) == null) {
          FoxLog.error("Tried applying bad potion type while sleeping on the ground. Potion ID: " + potionId);
          return;
       }
 
-      event.getPlayer().addPotionEffect(new PotionEffect(potionId, sleepInBedPotionLength));
+      event.getPlayer().addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(potionId), sleepInBedPotionLength));
    }
 }

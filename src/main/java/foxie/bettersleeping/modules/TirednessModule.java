@@ -15,8 +15,8 @@ import foxie.calendar.api.ICalendarProvider;
 import foxie.lib.Configurable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -26,33 +26,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TirednessModule extends Module {
-   public static  DamageSource tirednessDamage            = new DamageSource("tiredness").setDamageBypassesArmor();
+   public static DamageSource tirednessDamage = new DamageSource("tiredness").setDamageBypassesArmor();
    @Configurable(comment = "How much energy is regained per slept tick", min = "0")
-   private static double       regainedEnergyPerSleptTick = 3;
+   private static double regainedEnergyPerSleptTick = 3;
    @Configurable(comment = "Disable overcharging energy")
-   private static boolean      capEnergy                  = true;
+   private static boolean capEnergy = true;
    @Configurable(comment = "Maximum energy to allow sleeping at")
-   private static long         maximumEnergy              = 24000;
+   private static long maximumEnergy = 24000;
    @Configurable(comment = "Minimum energy to allow sleeping at")
-   private static long         minimumEnergy              = 8000;
+   private static long minimumEnergy = 8000;
    @Configurable(comment = "At which energy the player falls asleep on the ground (-1 to disable)")
-   private static long         sleepOnGroundAt            = 200;
+   private static long sleepOnGroundAt = 200;
    @Configurable(comment = "How much energy is lost per awake tick", min = "0")
-   private static long         energyPerAwakeTick         = 1;
+   private static long energyPerAwakeTick = 1;
    @Configurable(comment = "Energy to spawn with", min = "0")
-   private static long         energyToSpawnWith          = 48000;
+   private static long energyToSpawnWith = 48000;
    @Configurable(comment = "Should player die when they reach zero energy? (if sleeping on the ground at == 0 then they will die first)")
-   private static boolean      dieOnExhaustion            = true;
+   private static boolean dieOnExhaustion = true;
    @Configurable(comment = "Wake up time (24h day cycle, morning = 6h)")
-   private static int          wakeupHour                 = 6;
+   private static int wakeupHour = 6;
    @Configurable(comment = "Wake up with sleeping cap")
-   private static boolean      wakeupOnCap                = false;
+   private static boolean wakeupOnCap = false;
    @Configurable(comment = "Ticks before a player falls asleep", min = "0", max = "100")
-   private static int          dozingTimer                = 100;
+   private static int dozingTimer = 100;
    @Configurable(comment = "How much food is taken by every slept tick", min = "0")
-   private static double       hungerPerSleptTick         = 0.00001d;
+   private static double hungerPerSleptTick = 0.00001d;
    @Configurable(comment = "Do players get tired? (Disables everything related)")
-   private static boolean      playersGetTired            = true;
+   private static boolean playersGetTired = true;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
@@ -207,7 +207,7 @@ public class TirednessModule extends Module {
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.entityPlayer);
 
       if (data.getEnergy() > maximumEnergy && capEnergy || data.getEnergy() > minimumEnergy) {
-         event.entityPlayer.addChatMessage(new ChatComponentTranslation("message.notTired"));
+         event.entityPlayer.addChatMessage(new TextComponentTranslation("message.notTired"));
          event.result = EntityPlayer.EnumStatus.OTHER_PROBLEM;
       }
    }

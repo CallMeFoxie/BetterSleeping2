@@ -15,14 +15,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EnergyGuiOverlay extends GuiScreen {
 
-   private static final int BAR_WIDTH     = 32;
-   private static final int BAR_HEIGHT    = 8;
+   private static final int BAR_WIDTH = 32;
+   private static final int BAR_HEIGHT = 8;
    private static final int BAR_MAXOFFSET = BAR_WIDTH - BAR_HEIGHT;
 
    @Configurable(category = "gui")
    private static int guiOffsetLeft = 4;
    @Configurable(category = "gui")
-   private static int guiOffsetTop  = 8;
+   private static int guiOffsetTop = 8;
 
    public EnergyGuiOverlay() {
       Registrator.checkConfigurable(EnergyGuiOverlay.class);
@@ -30,7 +30,7 @@ public class EnergyGuiOverlay extends GuiScreen {
    }
 
    @SubscribeEvent
-   public void onGuiRender(RenderGameOverlayEvent event) {
+   public void onGuiRender(RenderGameOverlayEvent.Post event) {
       if (event.type != RenderGameOverlayEvent.ElementType.ALL || event.isCanceled() || ClientData.maxEnergy == -1)
          return;
 

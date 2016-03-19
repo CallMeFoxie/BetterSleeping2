@@ -9,10 +9,10 @@ public class PatchIsDay extends ClassPatch {
 
    public PatchIsDay(ClassWriter writer) {
       super(writer);
-      matchingMethods.add(new MethodToPatch("trySleep", "(Lnet/minecraft/util/BlockPos;)Lnet/minecraft/entity/player/EntityPlayer$EnumStatus;"));
-      matchingMethods.add(new MethodToPatch("a", "(Lcj;)Lwn$a;"));
+      matchingMethods.add(new MethodToPatch("trySleep", "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/entity/player/EntityPlayer$EnumStatus;"));
+      matchingMethods.add(new MethodToPatch("a", "(Lcj;)Lzj$a;"));
       matchingMethods.add(new MethodToPatch("onUpdate", "()V"));
-      matchingMethods.add(new MethodToPatch("t_", "()V"));
+      matchingMethods.add(new MethodToPatch("m", "()V"));
    }
 
    @Override
@@ -27,7 +27,7 @@ public class PatchIsDay extends ClassPatch {
 
       @Override
       public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-         if (desc.equals("()Z") && (name.equals("isDaytime") || name.equals("w"))) {
+         if (desc.equals("()Z") && (name.equals("isDaytime") || name.equals("B"))) {
             super.visitInsn(Opcodes.POP);
             mv.visitVarInsn(Opcodes.ALOAD, 0);
             super.visitMethodInsn(Opcodes.INVOKESTATIC, "foxie/bettersleeping/core/BSEvents", "isPlayerAllowedToSleep",

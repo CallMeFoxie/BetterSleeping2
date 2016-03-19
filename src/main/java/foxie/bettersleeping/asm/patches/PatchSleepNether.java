@@ -26,7 +26,7 @@ public class PatchSleepNether extends ClassPatch {
       StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
       if ((stackTraceElements[3].getMethodName().equals("sleepInBedAt") || stackTraceElements[3].getMethodName().equals("a")) &&
               stackTraceElements[3].getClassName().equals("net.minecraft.entity.player.EntityPlayer") || stackTraceElements[3].getClassName()
-              .equals("yz")) {
+              .equals("wn")) {
          if (Loader.isModLoaded("harvestthenether") && provider instanceof WorldProviderHell) {
             return true;
          }

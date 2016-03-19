@@ -11,7 +11,7 @@ public class PatchIsInBed extends ClassPatch {
    public PatchIsInBed(ClassWriter writer) {
       super(writer);
       matchingMethods.add(new MethodToPatch("isInBed", "()Z"));
-      matchingMethods.add(new MethodToPatch("p", "()Z"));
+      matchingMethods.add(new MethodToPatch("r", "()Z"));
    }
 
    @Override

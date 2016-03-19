@@ -7,7 +7,6 @@ import foxie.lib.Config;
 import foxie.lib.FoxieSavedData;
 import foxie.lib.IFoxieMod;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -23,9 +22,9 @@ import java.util.UUID;
 
 @Mod(modid = BetterSleeping.MODID, name = BetterSleeping.NAME, version = BetterSleeping.VERSION, dependencies = "required-after:FoxieLib;required-after:CalendarAPI")
 public class BetterSleeping implements IFoxieMod {
-   public static final String MODID   = "bettersleeping";
-   public static final String NAME    = "Better Sleeping 2";
-   public static final String AUTHOR  = "CallMeFoxie";
+   public static final String MODID = "bettersleeping";
+   public static final String NAME = "Better Sleeping 2";
+   public static final String AUTHOR = "CallMeFoxie";
    public static final String VERSION = "@VERSION@";
 
    @SidedProxy(clientSide = "foxie.bettersleeping.proxy.ProxyClient", serverSide = "foxie.bettersleeping.proxy.ProxyCommon")
@@ -36,7 +35,7 @@ public class BetterSleeping implements IFoxieMod {
 
    public HashMap<UUID, PlayerSyncStatus> syncData;
    FoxieSavedData playerData;
-   private Config  libConfig;
+   private Config libConfig;
    private Modules modules;
 
    public BetterSleeping() {
@@ -79,7 +78,7 @@ public class BetterSleeping implements IFoxieMod {
       if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
          return;
 
-      World world = MinecraftServer.getServer().worldServers[0];
+      World world = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().worldServers[0];
 
       playerData = (FoxieSavedData) world.loadItemData(FoxieSavedData.class, BetterSleeping.MODID);
       if (playerData == null) {

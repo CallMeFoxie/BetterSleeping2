@@ -2,17 +2,17 @@ package foxie.bettersleeping.modules;
 
 import foxie.bettersleeping.api.WorldSleepEvent;
 import foxie.lib.Configurable;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RandomModule extends Module {
 
    @Configurable(comment = "Allow setting spawn just on using a bed")
-   private static boolean alwaysSetSpawn   = true;
+   private static boolean alwaysSetSpawn = true;
    @Configurable(comment = "Chance to stop rain on world sleeping. 0 = never, 1 = always", min = "0", max = "1")
-   private static double  chanceToStopRain = 0.7;
+   private static double chanceToStopRain = 0.7;
 
    @SubscribeEvent
    public void onPlayerUseBed(PlayerSleepInBedEvent event) {
@@ -20,8 +20,8 @@ public class RandomModule extends Module {
          BlockPos blockpos = null;
          try {
             blockpos = event.entityPlayer.worldObj.getBlockState(event.entityPlayer.getPosition()).
-                    getBlock().getBedSpawnPosition(event.entityPlayer.worldObj,
-                    event.entityPlayer.playerLocation, event.entityPlayer);
+                    getBlock().getBedSpawnPosition(null, event.entityPlayer.worldObj,
+                    event.entityPlayer.getPosition(), event.entityPlayer);
 
          } catch (Exception ignored) {
          }
@@ -32,7 +32,7 @@ public class RandomModule extends Module {
 
          event.entityPlayer.setSpawnPoint(blockpos, false);
 
-         event.entityPlayer.addChatMessage(new ChatComponentTranslation("message.spawnSet"));
+         event.entityPlayer.addChatMessage(new TextComponentTranslation("message.spawnSet"));
       }
    }
 

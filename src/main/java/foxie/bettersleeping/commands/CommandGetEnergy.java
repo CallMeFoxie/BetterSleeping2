@@ -6,7 +6,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class CommandGetEnergy extends CommandBase {
    @Override
@@ -20,7 +21,7 @@ public class CommandGetEnergy extends CommandBase {
    }
 
    @Override
-   public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+   public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
       if (!(sender instanceof EntityPlayer))
          return;
 
@@ -28,6 +29,7 @@ public class CommandGetEnergy extends CommandBase {
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(player);
 
-      player.addChatMessage(new ChatComponentTranslation("message.energyGet", data.getEnergy()));
+      player.addChatMessage(new TextComponentTranslation("message.energyGet", data.getEnergy()));
+
    }
 }
