@@ -16,32 +16,32 @@ public class RandomModule extends Module {
 
    @SubscribeEvent
    public void onPlayerUseBed(PlayerSleepInBedEvent event) {
-      if (alwaysSetSpawn && !event.entityPlayer.worldObj.isRemote) {
+      if (alwaysSetSpawn && !event.getEntityPlayer().worldObj.isRemote) {
          BlockPos blockpos = null;
          try {
-            blockpos = event.entityPlayer.worldObj.getBlockState(event.entityPlayer.getPosition()).
-                    getBlock().getBedSpawnPosition(null, event.entityPlayer.worldObj,
-                    event.entityPlayer.getPosition(), event.entityPlayer);
+            blockpos = event.getEntityPlayer().worldObj.getBlockState(event.getEntityPlayer().getPosition()).
+                    getBlock().getBedSpawnPosition(null, event.getEntityPlayer().worldObj,
+                    event.getEntityPlayer().getPosition(), event.getEntityPlayer());
 
          } catch (Exception ignored) {
          }
 
          if (blockpos == null) {
-            blockpos = event.entityPlayer.getPosition().up();
+            blockpos = event.getEntityPlayer().getPosition().up();
          }
 
-         event.entityPlayer.setSpawnPoint(blockpos, false);
+         event.getEntityPlayer().setSpawnPoint(blockpos, false);
 
-         event.entityPlayer.addChatMessage(new TextComponentTranslation("message.spawnSet"));
+         event.getEntityPlayer().addChatMessage(new TextComponentTranslation("message.spawnSet"));
       }
    }
 
    @SubscribeEvent
    public void onWorldSlept(WorldSleepEvent.Post event) {
-      if (event.world.isRemote)
+      if (event.getWorld().isRemote)
          return;
 
-      if (event.world.rand.nextDouble() < chanceToStopRain)
-         event.world.provider.resetRainAndThunder();
+      if (event.getWorld().rand.nextDouble() < chanceToStopRain)
+         event.getWorld().provider.resetRainAndThunder();
    }
 }

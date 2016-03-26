@@ -14,13 +14,13 @@ public class BedModule extends Module {
 
    @SubscribeEvent
    public void isProperTime(PlayerSleepInBedEvent event) {
-      if (event.entityPlayer.worldObj.isRemote)
+      if (event.getEntityPlayer().worldObj.isRemote)
          return;
 
-      long time = event.entityPlayer.worldObj.getWorldTime() % 24000;
+      long time = event.getEntityPlayer().worldObj.getWorldTime() % 24000;
       if (time < minTime && minTime >= -1 || time > maxTime && minTime >= -1) {
-         event.entityPlayer.addChatComponentMessage(new TextComponentTranslation("message.notSleepNow"));
-         event.result = EntityPlayer.EnumStatus.OTHER_PROBLEM;
+         event.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("message.notSleepNow"));
+         event.setResult(EntityPlayer.EnumStatus.OTHER_PROBLEM);
       }
    }
 }

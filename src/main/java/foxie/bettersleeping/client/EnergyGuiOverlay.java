@@ -31,7 +31,7 @@ public class EnergyGuiOverlay extends GuiScreen {
 
    @SubscribeEvent
    public void onGuiRender(RenderGameOverlayEvent.Post event) {
-      if (event.type != RenderGameOverlayEvent.ElementType.ALL || event.isCanceled() || ClientData.maxEnergy == -1)
+      if (event.getType() != RenderGameOverlayEvent.ElementType.ALL || event.isCanceled() || ClientData.maxEnergy == -1)
          return;
 
       OpenGlHelper.glBlendFunc(770, 771, 0, 1);

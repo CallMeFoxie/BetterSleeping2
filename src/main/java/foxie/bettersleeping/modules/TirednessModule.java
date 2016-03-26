@@ -167,11 +167,11 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void onWorldSleepPre(WorldSleepEvent.Pre event) {
-      if (event.world.isRemote)
+      if (event.getWorld().isRemote)
          return;
 
       if (!wakeupOnCap) {
-         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.world);
+         ICalendarProvider calendar = CalendarAPI.getCalendarInstance(event.getWorld());
          // wake up by normal day cycles
          if (calendar.getHour() > wakeupHour) {
             calendar.setDay(calendar.getDay() + 1);
@@ -179,14 +179,14 @@ public class TirednessModule extends Module {
 
          calendar.setHour(wakeupHour);
 
-         event.setSleptTime(calendar.getTime() - CalendarAPI.getCalendarInstance(event.world).getTime(), WorldSleepEvent.PRIORITY_BUILTIN);
+         event.setSleptTime(calendar.getTime() - CalendarAPI.getCalendarInstance(event.getWorld()).getTime(), WorldSleepEvent.PRIORITY_BUILTIN);
 
       } else {
-         long ticks = event.world.provider.getWorldTime();
+         long ticks = event.getWorld().provider.getWorldTime();
 
          long maxSleep = 0;
 
-         for (EntityPlayer player : event.world.playerEntities) {
+         for (EntityPlayer player : event.getWorld().playerEntities) {
             PlayerBSData data = BetterSleepingAPI.getSleepingProperty(player);
             if (data.getEnergy() > maxSleep)
                maxSleep = data.getEnergy();
@@ -195,20 +195,20 @@ public class TirednessModule extends Module {
          // possibly sleep? (maxEnergy - currentEnergy) / regainedEnergyPerSleptTick
          ticks += (maximumEnergy - maxSleep) / regainedEnergyPerSleptTick;
 
-         event.setSleptTime(ticks - event.world.provider.getWorldTime(), WorldSleepEvent.PRIORITY_BUILTIN);
+         event.setSleptTime(ticks - event.getWorld().provider.getWorldTime(), WorldSleepEvent.PRIORITY_BUILTIN);
       }
    }
 
    @SubscribeEvent
    public void isPlayerAllowedToSleep(PlayerSleepInBedEvent event) {
-      if (event.entityPlayer.worldObj.isRemote || !playersGetTired)
+      if (event.getEntityPlayer().worldObj.isRemote || !playersGetTired)
          return;
 
-      PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.entityPlayer);
+      PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.getEntityPlayer());
 
       if (data.getEnergy() > maximumEnergy && capEnergy || data.getEnergy() > minimumEnergy) {
-         event.entityPlayer.addChatMessage(new TextComponentTranslation("message.notTired"));
-         event.result = EntityPlayer.EnumStatus.OTHER_PROBLEM;
+         event.getEntityPlayer().addChatMessage(new TextComponentTranslation("message.notTired"));
+         event.setResult(EntityPlayer.EnumStatus.OTHER_PROBLEM);
       }
    }
 
@@ -223,10 +223,10 @@ public class TirednessModule extends Module {
 
    @SubscribeEvent
    public void isPlayerFullyAsleep(PlayerSleepEvent.IsPlayerFullyAsleepEvent event) {
-      if (event.entityPlayer.worldObj.isRemote)
+      if (event.getEntityPlayer().worldObj.isRemote)
          return;
 
-      if (!event.entityPlayer.isPlayerSleeping() || event.getTimer() < dozingTimer)
+      if (!event.getEntityPlayer().isPlayerSleeping() || event.getTimer() < dozingTimer)
          event.setCanceled(true);
    }
 
