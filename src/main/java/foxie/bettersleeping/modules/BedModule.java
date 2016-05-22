@@ -20,7 +20,7 @@ public class BedModule extends Module {
       long time = event.getEntityPlayer().worldObj.getWorldTime() % 24000;
       if (time < minTime && minTime >= -1 || time > maxTime && minTime >= -1) {
          event.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("message.notSleepNow"));
-         event.setResult(EntityPlayer.EnumStatus.OTHER_PROBLEM);
+         event.setResult(EntityPlayer.SleepResult.OTHER_PROBLEM);
       }
    }
 }

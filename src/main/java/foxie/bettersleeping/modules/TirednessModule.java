@@ -208,7 +208,7 @@ public class TirednessModule extends Module {
 
       if (data.getEnergy() > maximumEnergy && capEnergy || data.getEnergy() > minimumEnergy) {
          event.getEntityPlayer().addChatMessage(new TextComponentTranslation("message.notTired"));
-         event.setResult(EntityPlayer.EnumStatus.OTHER_PROBLEM);
+         event.setResult(EntityPlayer.SleepResult.OTHER_PROBLEM);
       }
    }
 

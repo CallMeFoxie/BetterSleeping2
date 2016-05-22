@@ -25,7 +25,7 @@ public class DebuffModule extends Module {
    @Configurable(comment = "Effect length of sleeping on the ground")
    private static int sleepOnGroundPotionLength = 100;
    @Configurable(comment = "Potion IDs of random effects when sleeping")
-   private static String[] sleepInBedPotions = {"resistance", "fire_resistance", "water_breathing", "absorbtion", "saturation", "levitation"};
+   private static String[] sleepInBedPotions = {"resistance", "fire_resistance", "water_breathing", "absorbtion", "saturation"};
    @Configurable(comment = "Effect length of sleeping")
    private static int sleepInBedPotionLength = 100;
 
@@ -35,10 +35,10 @@ public class DebuffModule extends Module {
       Configuration cfg = new Configuration(new File(event.getModConfigurationDirectory().getPath() +
               "/" + BetterSleeping.MODID + "/debuffs.cfg"));
 
-      String[] debuffNames = {"moveSlowdown", "digSlowdown", "harm", "confusion", "blindness", "hunger", "weakness", "poison", "wither"};
-      boolean[] defaultEnable = {true, true, false, false, true, false, true, false, false};
-      int[] defaultTiredLevel = {800, 800, 800, 800, 800, 800, 800, 800, 800};
-      int[] defaultMaxScale = {3, 3, 1, 1, 2, 1, 3, 1, 1};
+      String[] debuffNames = {"slowness", "mining_fatigue", "nausea", "blindness", "hunger", "weakness", "poison", "wither"};
+      boolean[] defaultEnable = {true, true, false, true, false, true, false, false};
+      int[] defaultTiredLevel = {800, 800, 800, 800, 800, 800, 800, 800};
+      int[] defaultMaxScale = {3, 3, 1, 2, 1, 3, 1, 1};
       //int[] potionEffect = {Potion.moveSlowdown.getId(), Potion.digSlowdown.getId(), Potion.harm.getId(), Potion.confusion.getId(),
       //        Potion.blindness.getId(), Potion.hunger.getId(), Potion.weakness.getId(), Potion.poison.getId(), Potion.wither.getId()};
       Potion[] potionEffect = new Potion[debuffNames.length];
