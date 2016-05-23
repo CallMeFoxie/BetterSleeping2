@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EnergyGuiOverlay extends GuiScreen {
@@ -31,7 +32,9 @@ public class EnergyGuiOverlay extends GuiScreen {
 
    @SubscribeEvent
    public void onGuiRender(RenderGameOverlayEvent.Post event) {
-      if (event.getType() != RenderGameOverlayEvent.ElementType.ALL || event.isCanceled() || ClientData.maxEnergy == -1)
+      if (event.getType() != RenderGameOverlayEvent.ElementType.ALL || event.isCanceled()
+              || ClientData.maxEnergy == -1
+              || FMLClientHandler.instance().getClient().thePlayer.capabilities.isCreativeMode)
          return;
 
       OpenGlHelper.glBlendFunc(770, 771, 0, 1);
