@@ -21,10 +21,10 @@ public class PatchCollection implements IClassTransformer {
       addPatch("net.minecraft.world.WorldProviderHell", PatchSleepNether.class);
       addPatch("net.minecraft.entity.player.EntityPlayer", PatchIsPlayerAsleep.class);
 
-      addPatch("wn", PatchIsDay.class);
-      addPatch("wn", PatchIsInBed.class);
-      addPatch("ann", PatchSleepNether.class);
-      addPatch("wn", PatchIsPlayerAsleep.class);
+      addPatch("zj", PatchIsDay.class);
+      addPatch("zj", PatchIsInBed.class);
+      addPatch("asx", PatchSleepNether.class);
+      addPatch("zj", PatchIsPlayerAsleep.class);
    }
 
    public static void addPatch(String classname, Class<? extends ClassPatch> patch) {

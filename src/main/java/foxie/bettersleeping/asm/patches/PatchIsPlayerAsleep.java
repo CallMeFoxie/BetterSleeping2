@@ -9,7 +9,7 @@ public class PatchIsPlayerAsleep extends ClassPatch {
    public PatchIsPlayerAsleep(ClassWriter writer) {
       super(writer);
       matchingMethods.add(new MethodToPatch("isPlayerFullyAsleep", "()Z"));
-      matchingMethods.add(new MethodToPatch("cM", "()Z"));
+      matchingMethods.add(new MethodToPatch("cN", "()Z"));
    }
 
    @Override

@@ -29,4 +29,8 @@ public class SaveHandler {
       FoxieSavedData.instance().setPlayerData(player, data);
       cachedData.put(player.getUniqueID(), data);
    }
+
+   public static void emptyCache() {
+      cachedData.clear();
+   }
 }
