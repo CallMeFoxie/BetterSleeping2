@@ -8,8 +8,10 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.entity.player.SleepingLocationCheckEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
@@ -39,6 +41,12 @@ public class BedModule extends Module {
          event.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("message.notSleepNow"));
          event.setResult(EntityPlayer.SleepResult.OTHER_PROBLEM);
       }
+   }
+
+   // new Forge stuff
+   @SubscribeEvent
+   public void onSomething(SleepingLocationCheckEvent event) {
+      event.setResult(Event.Result.ALLOW); // TODO more checks possibly? :P
    }
 
    @SubscribeEvent

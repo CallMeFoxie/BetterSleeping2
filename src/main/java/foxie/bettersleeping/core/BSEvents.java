@@ -24,7 +24,7 @@ public class BSEvents {
       PlayerSleepEvent.SleepOnGroundEvent sleepOnGroundEvent = new PlayerSleepEvent.SleepOnGroundEvent(player);
       MinecraftForge.EVENT_BUS.post(sleepOnGroundEvent);
 
-      return sleepOnGroundEvent.isCanceled();
+      return !sleepOnGroundEvent.isCanceled();
    }
 
    public static long getSleepingTime(World world) {

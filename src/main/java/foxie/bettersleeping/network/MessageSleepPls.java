@@ -1,10 +1,9 @@
 package foxie.bettersleeping.network;
 
+import foxie.bettersleeping.BetterSleeping;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -21,16 +20,21 @@ public class MessageSleepPls implements IMessage, IMessageHandler<MessageSleepPl
    }
 
    @Override
-   public IMessage onMessage(MessageSleepPls message, MessageContext ctx) {
+   public IMessage onMessage(final MessageSleepPls message, final MessageContext ctx) {
 
-      EntityPlayer player = ctx.getServerHandler().playerEntity;
+      final EntityPlayer player = ctx.getServerHandler().playerEntity;
+      final BlockPos pos = player.getPosition();
       if (player.isPlayerSleeping())
          return null;
 
-      BlockPos pos = player.getPosition();
-      player.trySleep(pos);
 
-      player.addChatMessage(new TextComponentString("foo hi bar " + FMLCommonHandler.instance().getEffectiveSide().toString()));
+      BetterSleeping.proxy.getThreadListener(ctx).addScheduledTask(new Runnable() {
+         @Override
+         public void run() {
+            player.trySleep(pos);
+         }
+      });
+
 
       return null;
    }
