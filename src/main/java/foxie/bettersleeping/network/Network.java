@@ -17,5 +17,6 @@ public class Network {
 
    public static void init() {
       networkChannel.registerMessage(MessageUpdateTiredness.class, MessageUpdateTiredness.class, 1, Side.CLIENT);
+      networkChannel.registerMessage(MessageSleepPls.class, MessageSleepPls.class, 2, Side.SERVER);
    }
 }

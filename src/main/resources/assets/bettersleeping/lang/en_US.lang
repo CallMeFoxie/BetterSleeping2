@@ -6,3 +6,4 @@ message.energySet=The energy has been set for you.
 message.energyGet=Your current energy is %s.
 message.spawnSet=Your spawn has been set.
 message.notSleepNow=You cannot sleep at this time.
+key.gotosleep=Sleep
