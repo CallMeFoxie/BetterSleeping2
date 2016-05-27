@@ -18,7 +18,7 @@ import org.lwjgl.input.Keyboard;
 
 public class BedModule extends Module {
    @Configurable(comment = "Minimum day time to go to sleep at (-1 for anytime)", min = "0", max = "23999")
-   public static int minTime = 18000;
+   public static int minTime = 0;
    @Configurable(comment = "Maximum day time to go to sleep at (-1 for anytime)", min = "0", max = "23999")
    public static int maxTime = 23999;
 

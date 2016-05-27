@@ -34,7 +34,7 @@ public class TirednessModule extends Module {
    @Configurable(comment = "Maximum energy to allow sleeping at")
    private static long maximumEnergy = 24000;
    @Configurable(comment = "Minimum energy to allow sleeping at")
-   private static long minimumEnergy = 8000;
+   private static long minimumEnergy = 4000;
    @Configurable(comment = "At which energy the player falls asleep on the ground (-1 to disable)")
    private static long sleepOnGroundAt = 200;
    @Configurable(comment = "How much energy is lost per awake tick", min = "0")
