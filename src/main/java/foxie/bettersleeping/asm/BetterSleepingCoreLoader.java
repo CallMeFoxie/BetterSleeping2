@@ -5,7 +5,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 import java.util.Map;
 
-@IFMLLoadingPlugin.MCVersion("1.9.4")
+@IFMLLoadingPlugin.MCVersion("1.10")
 @IFMLLoadingPlugin.Name(BetterSleepingCoreLoader.NAME)
 public class BetterSleepingCoreLoader implements IFMLLoadingPlugin {
    public static final String NAME = "BetterSleeping Core";
