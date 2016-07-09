@@ -1,11 +1,13 @@
 package foxie.bettersleeping.modules;
 
 import foxie.lib.Registrator;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,9 @@ public class Modules {
       modules.add(new PillModule());
       modules.add(new TirednessModule());
       modules.add(new RandomModule());
+
+      if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+         modules.add(new ClientModule());
    }
 
    public void preinit(FMLPreInitializationEvent event) {
