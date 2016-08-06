@@ -10,7 +10,7 @@ public class PatchIsDay extends ClassPatch {
    public PatchIsDay(ClassWriter writer) {
       super(writer);
       matchingMethods.add(new MethodToPatch("trySleep", "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/entity/player/EntityPlayer$SleepResult;"));
-      matchingMethods.add(new MethodToPatch("a", "(Lcl;)Lzj$a;"));
+      matchingMethods.add(new MethodToPatch("a", "(Lcm;)Lzs$a;"));
       matchingMethods.add(new MethodToPatch("onUpdate", "()V"));
       matchingMethods.add(new MethodToPatch("m", "()V"));
    }
