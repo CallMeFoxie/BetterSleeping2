@@ -25,6 +25,9 @@ public class EnergyGuiOverlay extends GuiScreen {
    @Configurable(category = "gui")
    private static int guiOffsetTop = 8;
 
+   @Configurable(category = "gui")
+   private static boolean renderBedIcon = true;
+
    public EnergyGuiOverlay() {
       Registrator.checkConfigurable(EnergyGuiOverlay.class);
       itemRender = Minecraft.getMinecraft().getRenderItem();
@@ -52,8 +55,8 @@ public class EnergyGuiOverlay extends GuiScreen {
 
       drawTexturedModalRect((int) (guiOffsetLeft + percent), guiOffsetTop, 0, 8, 8, 8);
 
-      itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.BED), guiOffsetLeft + 36, guiOffsetTop - 4);
-
+      if (renderBedIcon)
+         itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.BED), guiOffsetLeft + 36, guiOffsetTop - 4);
 
    }
 }
