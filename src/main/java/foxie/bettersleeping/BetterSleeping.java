@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
-@Mod(modid = BetterSleeping.MODID, name = BetterSleeping.NAME, version = BetterSleeping.VERSION, dependencies = "required-after:FoxieLib;required-after:CalendarAPI")
+@Mod(modid = BetterSleeping.MODID, name = BetterSleeping.NAME, version = BetterSleeping.VERSION, dependencies = "required-after:foxielib;required-after:calendarapi")
 public class BetterSleeping implements IFoxieMod {
    public static final String MODID = "bettersleeping";
    public static final String NAME = "Better Sleeping 2";
