@@ -1,10 +1,12 @@
 package foxie.bettersleeping;
 
+import foxie.bettersleeping.asm.patches.PatchSleepNether;
 import foxie.bettersleeping.commands.CommandCollection;
 import foxie.bettersleeping.modules.Modules;
 import foxie.bettersleeping.proxy.ProxyCommon;
 import foxie.lib.Config;
 import foxie.lib.IFoxieMod;
+import foxie.lib.Registrator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -57,6 +59,7 @@ public class BetterSleeping implements IFoxieMod {
       proxy.preinit(event);
       modules = new Modules();
       modules.preinit(event);
+      Registrator.checkConfigurable(PatchSleepNether.class);
    }
 
    @Mod.EventHandler

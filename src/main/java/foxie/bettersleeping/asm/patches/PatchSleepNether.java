@@ -1,16 +1,18 @@
 package foxie.bettersleeping.asm.patches;
 
 import foxie.bettersleeping.asm.MethodToPatch;
+import foxie.lib.Configurable;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldProviderHell;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class PatchSleepNether extends ClassPatch {
+
+   @Configurable(category = "extra")
+   public static boolean allowSleepingInNether = false;
 
    public PatchSleepNether(ClassWriter writer) {
       super(writer);
@@ -24,15 +26,10 @@ public class PatchSleepNether extends ClassPatch {
          return false;
 
       StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-      if ((stackTraceElements[3].getMethodName().equals("sleepInBedAt") || stackTraceElements[3].getMethodName().equals("a")) &&
+      return (allowSleepingInNether &&
+              (stackTraceElements[3].getMethodName().equals("trySleep") || stackTraceElements[3].getMethodName().equals("a")) &&
               stackTraceElements[3].getClassName().equals("net.minecraft.entity.player.EntityPlayer") || stackTraceElements[3].getClassName()
-              .equals("wn")) {
-         if (Loader.isModLoaded("harvestthenether") && provider instanceof WorldProviderHell) {
-            return true;
-         }
-      }
-
-      return false;
+              .equals("zs"));
    }
 
    @Override
