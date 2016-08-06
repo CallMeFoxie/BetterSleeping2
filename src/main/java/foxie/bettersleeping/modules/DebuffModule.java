@@ -106,7 +106,7 @@ public class DebuffModule extends Module {
 
       String potionId = sleepInBedPotions[event.getPlayer().worldObj.rand.nextInt(sleepInBedPotions.length)];
       if (Potion.getPotionFromResourceLocation(potionId) == null) {
-         FoxLog.error("Tried applying bad potion type while sleeping on the ground. Potion ID: " + potionId);
+         FoxLog.error("Tried applying bad potion type while sleeping in the bed. Potion ID: " + potionId);
          return;
       }
 
