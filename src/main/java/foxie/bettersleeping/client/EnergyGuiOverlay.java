@@ -52,7 +52,7 @@ public class EnergyGuiOverlay extends GuiScreen {
 
       drawTexturedModalRect((int) (guiOffsetLeft + percent), guiOffsetTop, 0, 8, 8, 8);
 
-      itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.BED), guiOffsetLeft + 40, guiOffsetTop - 2);
+      itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.BED), guiOffsetLeft + 36, guiOffsetTop - 4);
 
 
    }
