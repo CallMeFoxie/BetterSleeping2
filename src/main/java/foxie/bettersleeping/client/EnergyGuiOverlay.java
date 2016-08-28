@@ -38,7 +38,7 @@ public class EnergyGuiOverlay extends GuiScreen {
       if (Minecraft.getMinecraft().gameSettings.showDebugInfo)
          return;
 
-      if (event.getType() != RenderGameOverlayEvent.ElementType.ALL || event.isCanceled()
+      if (event.getType() != RenderGameOverlayEvent.ElementType.CROSSHAIRS || event.isCanceled()
               || ClientData.maxEnergy == -1
               || FMLClientHandler.instance().getClient().thePlayer.capabilities.isCreativeMode)
          return;
