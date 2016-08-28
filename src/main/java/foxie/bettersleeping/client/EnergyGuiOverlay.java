@@ -11,7 +11,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EnergyGuiOverlay extends GuiScreen {
@@ -38,9 +37,11 @@ public class EnergyGuiOverlay extends GuiScreen {
       if (Minecraft.getMinecraft().gameSettings.showDebugInfo)
          return;
 
+      if (!Minecraft.getMinecraft().playerController.getCurrentGameType().isSurvivalOrAdventure())
+         return;
+
       if (event.getType() != RenderGameOverlayEvent.ElementType.CROSSHAIRS || event.isCanceled()
-              || ClientData.maxEnergy == -1
-              || FMLClientHandler.instance().getClient().thePlayer.capabilities.isCreativeMode)
+              || ClientData.maxEnergy == -1)
          return;
 
       OpenGlHelper.glBlendFunc(770, 771, 0, 1);
