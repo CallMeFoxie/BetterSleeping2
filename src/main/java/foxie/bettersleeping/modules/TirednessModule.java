@@ -32,15 +32,15 @@ public class TirednessModule extends Module {
    @Configurable(comment = "Disable overcharging energy")
    private static boolean capEnergy = true;
    @Configurable(comment = "Maximum energy to allow sleeping at")
-   private static long maximumEnergy = 24000;
+   private static int maximumEnergy = 24000;
    @Configurable(comment = "Minimum energy to allow sleeping at")
-   private static long minimumEnergy = 4000;
+   private static int minimumEnergy = 4000;
    @Configurable(comment = "At which energy the player falls asleep on the ground (-1 to disable)")
-   private static long sleepOnGroundAt = 200;
+   private static int sleepOnGroundAt = 200;
    @Configurable(comment = "How much energy is lost per awake tick", min = "0")
-   private static long energyPerAwakeTick = 1;
+   private static int energyPerAwakeTick = 1;
    @Configurable(comment = "Energy to spawn with", min = "0")
-   private static long energyToSpawnWith = 48000;
+   private static int energyToSpawnWith = 48000;
    @Configurable(comment = "Should player die when they reach zero energy? (if sleeping on the ground at == 0 then they will die first)")
    private static boolean dieOnExhaustion = true;
    @Configurable(comment = "Wake up time (24h day cycle, morning = 6h)")
