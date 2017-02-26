@@ -36,6 +36,12 @@ public abstract class PlayerSleepEvent extends PlayerEvent {
     * This event is cancelable. When cancelled the sleeping will be denied.
     */
    @Cancelable
+   public static class SleepOnGroundAllowedEvent extends PlayerSleepEvent {
+      public SleepOnGroundAllowedEvent(EntityPlayer player) {
+         super(player);
+      }
+   }
+
    public static class SleepOnGroundEvent extends PlayerSleepEvent {
       public SleepOnGroundEvent(EntityPlayer player) {
          super(player);

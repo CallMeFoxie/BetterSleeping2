@@ -20,8 +20,13 @@ public class BSEvents {
       MinecraftForge.EVENT_BUS.post(fallingAsleep);
    }
 
+   public static void playerSleptOnTheGround(EntityPlayer player) {
+      PlayerSleepEvent.SleepOnGroundEvent event = new PlayerSleepEvent.SleepOnGroundEvent(player);
+      MinecraftForge.EVENT_BUS.post(event);
+   }
+
    public static boolean canPlayerSleepOnTheGround(EntityPlayer player) {
-      PlayerSleepEvent.SleepOnGroundEvent sleepOnGroundEvent = new PlayerSleepEvent.SleepOnGroundEvent(player);
+      PlayerSleepEvent.SleepOnGroundAllowedEvent sleepOnGroundEvent = new PlayerSleepEvent.SleepOnGroundAllowedEvent(player);
       MinecraftForge.EVENT_BUS.post(sleepOnGroundEvent);
 
       return !sleepOnGroundEvent.isCanceled();

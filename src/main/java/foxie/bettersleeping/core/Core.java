@@ -8,7 +8,9 @@ public class Core {
       if (!allowed) {
          // failed :(
       } else {
-         player.trySleep(player.getPosition());
+         if (player.trySleep(player.getPosition()) == EntityPlayer.SleepResult.OK) {
+            BSEvents.playerSleptOnTheGround(player);
+         }
       }
    }
 }

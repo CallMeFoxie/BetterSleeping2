@@ -53,6 +53,8 @@ public class TirednessModule extends Module {
    private static double hungerPerSleptTick = 0.00001d;
    @Configurable(comment = "Do players get tired? (Disables everything related)")
    private static boolean playersGetTired = true;
+   @Configurable(comment = "Can players sleep on ground with a key press")
+   private static boolean sleepOnGroundButton = true;
 
    public static long getSpawnEnergy() {
       return energyToSpawnWith;
@@ -101,11 +103,10 @@ public class TirednessModule extends Module {
             return;
          }
 
-         if (sleepOnGroundAt < 0)
-            return;
-
-         if (data.getEnergy() <= sleepOnGroundAt) {
-            Core.trySleepingPlayerOnTheGround(event.player);
+         if (sleepOnGroundAt >= 0) {
+            if (data.getEnergy() <= sleepOnGroundAt) {
+               Core.trySleepingPlayerOnTheGround(event.player);
+            }
          }
       } else if (event.player.isPlayerSleeping()) {
          data.addEnergy((long) regainedEnergyPerSleptTick);
@@ -200,7 +201,13 @@ public class TirednessModule extends Module {
    }
 
    @SubscribeEvent
-   public void isPlayerAllowedToSleep(PlayerSleepInBedEvent event) {
+   public void canPlayerSleepOnGround(PlayerSleepEvent.SleepOnGroundAllowedEvent event) {
+      if (!sleepOnGroundButton)
+         event.setCanceled(true);
+   }
+
+   @SubscribeEvent
+   public void playerSlept(PlayerSleepInBedEvent event) {
       if (event.getEntityPlayer().worldObj.isRemote || !playersGetTired)
          return;
 

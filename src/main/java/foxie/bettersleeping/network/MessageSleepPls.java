@@ -1,6 +1,7 @@
 package foxie.bettersleeping.network;
 
 import foxie.bettersleeping.BetterSleeping;
+import foxie.bettersleeping.core.Core;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -27,14 +28,12 @@ public class MessageSleepPls implements IMessage, IMessageHandler<MessageSleepPl
       if (player.isPlayerSleeping())
          return null;
 
-
       BetterSleeping.proxy.getThreadListener(ctx).addScheduledTask(new Runnable() {
          @Override
          public void run() {
-            player.trySleep(pos);
+            Core.trySleepingPlayerOnTheGround(player);
          }
       });
-
 
       return null;
    }
