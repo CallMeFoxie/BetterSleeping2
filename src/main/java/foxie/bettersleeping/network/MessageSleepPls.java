@@ -23,7 +23,7 @@ public class MessageSleepPls implements IMessage, IMessageHandler<MessageSleepPl
    @Override
    public IMessage onMessage(final MessageSleepPls message, final MessageContext ctx) {
 
-      final EntityPlayer player = ctx.getServerHandler().playerEntity;
+      final EntityPlayer player = ctx.getServerHandler().player;
       final BlockPos pos = player.getPosition();
       if (player.isPlayerSleeping())
          return null;

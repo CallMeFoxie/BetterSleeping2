@@ -51,14 +51,14 @@ repositories {
 
     maven {
         name "Foxiehost"
-        url "http://maven.foxiehost.eu"
+        url "https://maven.foxiehost.eu"
     }
 }
 
 dependencies {
     compile(group: 'openblocks', name: 'OpenBlocks-API', version: '1.1')
-    compile "foxie:FoxieLib:1.10.2-1.0-9:deobf"
-    compile "foxie:Calendar:1.10.2-1.5-10:deobf"
+    deobfCompile(group: "foxie", name: "FoxieLib", version: "1.11.2-1.0-11")
+    deobfCompile "foxie:Calendar:1.11.2-1.5-11:deobf"
 }
 
 processResources
@@ -79,6 +79,7 @@ jar {
     manifest {
         attributes 'FMLCorePlugin': 'foxie.bettersleeping.asm.BetterSleepingCoreLoader'
         attributes 'FMLCorePluginContainsFMLMod': 'true'
+        attributes 'FMLAT': 'ImmersiveEngineering_at.cfg'
     }
 }
 

@@ -11,12 +11,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class CommandGetEnergy extends CommandBase {
    @Override
-   public String getCommandName() {
+   public String getName() {
       return "getenergy";
    }
 
    @Override
-   public String getCommandUsage(ICommandSender sender) {
+   public String getUsage(ICommandSender sender) {
       return "getenergy";
    }
 
@@ -29,7 +29,7 @@ public class CommandGetEnergy extends CommandBase {
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(player);
 
-      player.addChatMessage(new TextComponentTranslation("message.energyGet", data.getEnergy()));
+      player.sendMessage(new TextComponentTranslation("message.energyGet", data.getEnergy()));
 
    }
 }

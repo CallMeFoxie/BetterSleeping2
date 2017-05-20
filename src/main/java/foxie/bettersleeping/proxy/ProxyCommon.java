@@ -21,6 +21,6 @@ public class ProxyCommon {
    }
 
    public IThreadListener getThreadListener(MessageContext ctx) {
-      return (IThreadListener) ctx.getServerHandler().playerEntity.worldObj;
+      return (IThreadListener) ctx.getServerHandler().player.world;
    }
 }

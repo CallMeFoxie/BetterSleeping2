@@ -16,11 +16,11 @@ public class RandomModule extends Module {
 
    @SubscribeEvent
    public void onPlayerUseBed(PlayerSleepInBedEvent event) {
-      if (alwaysSetSpawn && !event.getEntityPlayer().worldObj.isRemote) {
+      if (alwaysSetSpawn && !event.getEntityPlayer().world.isRemote) {
          BlockPos blockpos = null;
          try {
-            blockpos = event.getEntityPlayer().worldObj.getBlockState(event.getEntityPlayer().getPosition()).
-                    getBlock().getBedSpawnPosition(null, event.getEntityPlayer().worldObj,
+            blockpos = event.getEntityPlayer().world.getBlockState(event.getEntityPlayer().getPosition()).
+                    getBlock().getBedSpawnPosition(null, event.getEntityPlayer().world,
                     event.getEntityPlayer().getPosition(), event.getEntityPlayer());
 
          } catch (Exception ignored) {
@@ -32,7 +32,7 @@ public class RandomModule extends Module {
 
          event.getEntityPlayer().setSpawnPoint(blockpos, false);
 
-         event.getEntityPlayer().addChatMessage(new TextComponentTranslation("message.spawnSet"));
+         event.getEntityPlayer().sendMessage(new TextComponentTranslation("message.spawnSet"));
       }
    }
 

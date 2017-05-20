@@ -68,7 +68,7 @@ public class DebuffModule extends Module {
 
    @SubscribeEvent
    public void playerTick(TickEvent.PlayerTickEvent event) {
-      if (event.phase != TickEvent.Phase.START || event.player.worldObj.isRemote || !TirednessModule.doPlayersGetTired())
+      if (event.phase != TickEvent.Phase.START || event.player.world.isRemote || !TirednessModule.doPlayersGetTired())
          return;
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(event.player);
@@ -90,7 +90,7 @@ public class DebuffModule extends Module {
       if (sleepOnGroundPotions.length == 0 || sleepOnGroundPotionLength == 0)
          return;
 
-      String potionId = sleepOnGroundPotions[event.getPlayer().worldObj.rand.nextInt(sleepOnGroundPotions.length)];
+      String potionId = sleepOnGroundPotions[event.getPlayer().world.rand.nextInt(sleepOnGroundPotions.length)];
       if (Potion.getPotionFromResourceLocation(potionId) == null) {
          FoxLog.error("Tried applying bad potion type while sleeping on the ground. Potion ID: " + potionId);
          return;
@@ -104,7 +104,7 @@ public class DebuffModule extends Module {
       if (sleepInBedPotions.length == 0 || sleepInBedPotionLength == 0)
          return;
 
-      String potionId = sleepInBedPotions[event.getPlayer().worldObj.rand.nextInt(sleepInBedPotions.length)];
+      String potionId = sleepInBedPotions[event.getPlayer().world.rand.nextInt(sleepInBedPotions.length)];
       if (Potion.getPotionFromResourceLocation(potionId) == null) {
          FoxLog.error("Tried applying bad potion type while sleeping in the bed. Potion ID: " + potionId);
          return;
