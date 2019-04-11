@@ -1,9 +1,0 @@
-death.attack.coffeeOverdose=%s has died from coffee overdose!
-death.attack.pillOverdose=%s has died from nomming on too many pills!
-death.attack.tiredness=%s has tired themselves to death!
-message.notTired=You are not tired enough to sleep!
-message.energySet=The energy has been set for you.
-message.energyGet=Your current energy is %s.
-message.spawnSet=Your spawn has been set.
-message.notSleepNow=You cannot sleep at this time.
-key.gotosleep=Sleep
