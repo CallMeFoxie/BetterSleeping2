@@ -1,6 +1,5 @@
 package foxie.bettersleeping.api;
 
-
 import foxie.bettersleeping.SaveHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;

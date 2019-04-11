@@ -7,16 +7,26 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class CommandGetEnergy extends CommandBase {
+
    @Override
-   public String getCommandName() {
+   public String getUsage(ICommandSender sender) {
       return "getenergy";
    }
 
    @Override
-   public String getCommandUsage(ICommandSender sender) {
+   public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+      return super.getTabCompletions(server, sender, args, targetPos);
+   }
+
+   @Override
+   public String getName() {
       return "getenergy";
    }
 
@@ -29,7 +39,7 @@ public class CommandGetEnergy extends CommandBase {
 
       PlayerBSData data = BetterSleepingAPI.getSleepingProperty(player);
 
-      player.addChatMessage(new TextComponentTranslation("message.energyGet", data.getEnergy()));
+      player.sendMessage(new TextComponentTranslation("message.energyGet", data.getEnergy()));
 
    }
 }
