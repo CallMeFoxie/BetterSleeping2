@@ -118,3 +118,53 @@ artifacts {
 }
 
 build.dependsOn deobfJar, apiJar
+/*
+// deployment
+configurations { deployerJars }
+dependencies { deployerJars "org.apache.maven.wagon:wagon-ssh:2.2" }
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+            repository(url: "scp://maven.foxiehost.lan/home/maven/public/") {
+                authentication(userName: "maven", password: "maven")
+            }
+            pom {
+                groupId = project.group
+                version = project.version
+                artifactId = project.archivesBaseName
+                project {
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'Calendar'
+                    url 'http://foxiemods.com/Calendar'
+                    scm {
+                        url 'https://github.com/CallMeFoxie/Calendar'
+                        connection 'scm:git:git@github.com:CallMeFoxie/Calendar.git'
+                        developerConnection 'scm:git:git@github.com:CallMeFoxie/Calendar.git'
+                    }
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/CallMeFoxie/Calendar/issues'
+                    }
+                    licenses {
+                        license {
+                            name 'TBD'
+                            url 'https://does-not-exist'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'CallMeFoxie'
+                            name 'CallMeFoxie'
+                            roles { role 'developer' }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*/
